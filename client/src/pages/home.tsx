@@ -196,7 +196,7 @@ export default function Home() {
             Detect AI-Generated Images
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            Upload any image and our advanced AI model will analyze it to determine if it's real or artificially generated. Get instant results with confidence scores.
+            Upload any image and our professional analysis system will examine pixel patterns, compression signatures, metadata, and technical characteristics to determine authenticity with detailed forensic reporting.
           </p>
         </div>
 
@@ -344,8 +344,8 @@ export default function Home() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                        <span className="text-slate-600">Model Version</span>
-                        <span className="font-medium text-slate-900">v2.1.0</span>
+                        <span className="text-slate-600">Analysis Method</span>
+                        <span className="font-medium text-slate-900">Professional Forensic</span>
                       </div>
                     </div>
                   </div>
@@ -366,6 +366,15 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
+                  </div>
+
+                  {/* Professional Disclaimer */}
+                  <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs text-blue-800">
+                      <strong>Professional Analysis:</strong> Results based on technical examination of compression patterns, 
+                      pixel statistics, metadata analysis, and forensic characteristics. For critical applications, 
+                      consider additional expert verification.
+                    </p>
                   </div>
 
                   {/* Action Buttons */}
