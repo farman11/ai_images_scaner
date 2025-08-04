@@ -57,9 +57,15 @@ export default function Home() {
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [showAd, setShowAd] = useState(false);
   const [showAdModal, setShowAdModal] = useState(false);
+  const [showDownloadAdModal, setShowDownloadAdModal] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+
+  // Handle download report button click - show modal first
+  const handleDownloadReportClick = () => {
+    setShowDownloadAdModal(true);
+  };
 
   // Professional PDF Report Generator
   const generatePDFReport = () => {
@@ -596,6 +602,18 @@ export default function Home() {
           isOpen={showAdModal}
           onClose={() => setShowAdModal(false)}
           onContinue={() => setShowAdModal(false)}
+        />
+      )}
+
+      {/* Download Report Ad Modal */}
+      {showDownloadAdModal && (
+        <AdModal 
+          isOpen={showDownloadAdModal}
+          onClose={() => setShowDownloadAdModal(false)}
+          onContinue={() => {
+            setShowDownloadAdModal(false);
+            generatePDFReport();
+          }}
         />
       )}
 
@@ -1162,7 +1180,7 @@ export default function Home() {
                     <Button 
                       variant="outline" 
                       className="flex-1 transform transition-all duration-300 hover:scale-105"
-                      onClick={generatePDFReport}
+                      onClick={handleDownloadReportClick}
                     >
                       <Download className="h-4 w-4 mr-2" />
                       Download Report
