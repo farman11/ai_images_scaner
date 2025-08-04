@@ -614,7 +614,7 @@ export default function Home() {
             Detect AI-Generated Images
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Upload any image and our advanced multi-algorithm system will use texture analysis, frequency domain detection, compression forensics, statistical pattern recognition, and EXIF metadata examination to determine authenticity with professional accuracy.
+            Upload an image, and our system will verify its authenticity using advanced analysis.
           </p>
         </div>
 
