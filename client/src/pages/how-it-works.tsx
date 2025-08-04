@@ -24,11 +24,11 @@ export default function HowItWorks() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-xl border-b border-white/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <Eye className="text-white h-5 w-5" />
               </div>
               <div>
@@ -67,7 +67,7 @@ export default function HowItWorks() {
           <div className="grid md:grid-cols-4 gap-8 mb-16">
             <div className="text-center group">
               <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Upload className="h-10 w-10" />
                 </div>
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
@@ -78,7 +78,7 @@ export default function HowItWorks() {
 
             <div className="text-center group">
               <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Brain className="h-10 w-10" />
                 </div>
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
@@ -89,7 +89,7 @@ export default function HowItWorks() {
 
             <div className="text-center group">
               <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                   <BarChart3 className="h-10 w-10" />
                 </div>
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
@@ -100,7 +100,7 @@ export default function HowItWorks() {
 
             <div className="text-center group">
               <div className="relative mb-6">
-                <div className="w-20 h-20 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-2xl flex items-center justify-center mx-auto shadow-xl group-hover:scale-110 transition-transform duration-300">
+                <div className="w-20 h-20 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300">
                   <Download className="h-10 w-10" />
                 </div>
                 <div className="absolute -top-2 -right-2 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
@@ -118,7 +118,7 @@ export default function HowItWorks() {
           <h2 className="text-3xl font-bold text-center text-slate-900 mb-12">Advanced Detection Algorithms</h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
                   <Microscope className="h-6 w-6 text-blue-600" />
@@ -128,7 +128,7 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
                   <Search className="h-6 w-6 text-green-600" />
@@ -138,7 +138,7 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
                   <Cpu className="h-6 w-6 text-purple-600" />
@@ -148,7 +148,7 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
                   <FileImage className="h-6 w-6 text-yellow-600" />
@@ -158,7 +158,7 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
                   <Database className="h-6 w-6 text-red-600" />
@@ -168,7 +168,7 @@ export default function HowItWorks() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-6">
                 <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-4">
                   <BarChart3 className="h-6 w-6 text-indigo-600" />

@@ -203,11 +203,11 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20 relative z-10">
+      <header className="bg-white/80 backdrop-blur-xl border-b border-white/20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-16">
             <div className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <Eye className="text-white h-5 w-5" />
               </div>
               <div>
@@ -233,11 +233,11 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Upload Section */}
           <div className="space-y-6">
-            <Card className="shadow-2xl border-0 bg-gradient-to-br from-white via-[#5bc0be]/10 to-[#4a9a98]/10 backdrop-blur-xl border border-white/20">
+            <Card className="border-0 bg-gradient-to-br from-white via-[#5bc0be]/10 to-[#4a9a98]/10 backdrop-blur-xl border border-white/20">
               <CardContent className="p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3">
                       <Upload className="h-5 w-5 text-white" />
                     </div>
                     Upload Image
@@ -269,8 +269,8 @@ export default function Home() {
                     relative border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer
                     transition-all duration-500 transform group
                     ${selectedFile 
-                      ? 'border-[#5bc0be] bg-gradient-to-br from-[#5bc0be]/20 to-[#4a9a98]/20 scale-[1.02] shadow-lg' 
-                      : 'border-slate-300 hover:border-[#5bc0be] hover:bg-gradient-to-br hover:from-[#5bc0be]/10 hover:to-[#4a9a98]/10 hover:scale-[1.02] hover:shadow-xl'
+                      ? 'border-[#5bc0be] bg-gradient-to-br from-[#5bc0be]/20 to-[#4a9a98]/20 scale-[1.02]' 
+                      : 'border-slate-300 hover:border-[#5bc0be] hover:bg-gradient-to-br hover:from-[#5bc0be]/10 hover:to-[#4a9a98]/10 hover:scale-[1.02] hover:bg-gradient-to-br'
                     }
                   `}
                   onDrop={handleDrop}
@@ -285,7 +285,7 @@ export default function Home() {
                       <div className="relative">
                         <div className="w-20 h-20 mx-auto mb-6 relative">
                           <div className="absolute inset-0 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full opacity-20 animate-ping"></div>
-                          <div className="relative w-full h-full bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+                          <div className="relative w-full h-full bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                             <CloudUpload className="h-10 w-10 text-white" />
                           </div>
                         </div>
@@ -302,7 +302,7 @@ export default function Home() {
                       <div className="relative">
                         <div className="w-20 h-20 mx-auto mb-6 relative">
                           <div className="absolute inset-0 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full opacity-20 animate-ping"></div>
-                          <div className="relative w-full h-full bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full flex items-center justify-center shadow-xl">
+                          <div className="relative w-full h-full bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full flex items-center justify-center">
                             <CheckCircle className="h-10 w-10 text-white" />
                           </div>
                         </div>
@@ -331,7 +331,7 @@ export default function Home() {
                   <Button 
                     type="button" 
                     size="lg"
-                    className="bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] hover:from-[#4a9a98] hover:to-[#3a7875] text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
+                    className="bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] hover:from-[#4a9a98] hover:to-[#3a7875] text-white font-semibold px-8 py-3 rounded-xl transform transition-all duration-300 hover:scale-105"
                   >
                     <Upload className="w-5 h-5 mr-2" />
                     Choose File
@@ -373,7 +373,7 @@ export default function Home() {
                             <img 
                               src={previewUrl} 
                               alt="Selected image preview" 
-                              className="w-full h-full object-cover rounded-full shadow-xl transition-all duration-500 group-hover:scale-105"
+                              className="w-full h-full object-cover rounded-full transition-all duration-500 group-hover:scale-105"
                               data-testid="image-preview"
                             />
                           </div>
@@ -392,7 +392,7 @@ export default function Home() {
                           variant="ghost"
                           size="sm"
                           onClick={removeFile}
-                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 z-10"
+                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition-all duration-200 hover:scale-110 z-10"
                           data-testid="remove-image-button"
                         >
                           <X className="h-3 w-3" />
@@ -401,7 +401,7 @@ export default function Home() {
                       
                       {/* Status Indicator */}
                       <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-                        <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-[#5bc0be]/40">
+                        <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 border border-[#5bc0be]/40">
                           <div className="w-2 h-2 bg-[#5bc0be] rounded-full animate-pulse"></div>
                           <span className="text-xs font-medium text-[#4a9a98]">Image Ready</span>
                         </div>
@@ -442,11 +442,11 @@ export default function Home() {
             </Card>
 
             {/* Analysis Action Card */}
-            <Card className="shadow-2xl border-0 bg-gradient-to-br from-[#5bc0be]/10 via-[#4a9a98]/10 to-[#5bc0be]/5 backdrop-blur-xl border border-white/20">
+            <Card className="border-0 bg-gradient-to-br from-[#5bc0be]/10 via-[#4a9a98]/10 to-[#5bc0be]/5 backdrop-blur-xl border border-white/20">
               <CardContent className="p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-bold text-slate-900 flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3">
                       <Microscope className="h-5 w-5 text-white" />
                     </div>
                     Start Analysis
@@ -487,9 +487,9 @@ export default function Home() {
                     w-full py-4 text-lg font-bold rounded-xl
                     bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] 
                     hover:from-[#4a9a98] hover:to-[#3a7875]
-                    transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl
-                    disabled:hover:scale-100 disabled:hover:shadow-lg disabled:opacity-60
-                    ${isAnalyzing ? 'animate-pulse shadow-2xl' : 'shadow-xl'}
+                    transform transition-all duration-500 hover:scale-[1.02]
+                    disabled:hover:scale-100 disabled:opacity-60
+                    ${isAnalyzing ? 'animate-pulse' : ''}
                     ${selectedFile ? 'ring-2 ring-[#5bc0be]/30 ring-offset-2' : ''}
                   `}
                   data-testid="analyze-image-button"
@@ -533,11 +533,11 @@ export default function Home() {
           </div>
 
           {/* Results Section */}
-          <Card className="shadow-2xl border-0 bg-gradient-to-br from-white via-[#5bc0be]/10 to-[#4a9a98]/10 backdrop-blur-xl border border-white/20">
+          <Card className="border-0 bg-gradient-to-br from-white via-[#5bc0be]/10 to-[#4a9a98]/10 backdrop-blur-xl border border-white/20">
             <CardContent className="p-8">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3">
                     <BarChart3 className="h-5 w-5 text-white" />
                   </div>
                   Analysis Results
@@ -552,7 +552,7 @@ export default function Home() {
                   <div className="relative mb-6">
                     <div className="w-24 h-24 mx-auto relative">
                       <div className="absolute inset-0 bg-gradient-to-br from-slate-300 to-slate-400 rounded-full opacity-20"></div>
-                      <div className="relative w-full h-full bg-gradient-to-br from-slate-400 to-slate-500 rounded-full flex items-center justify-center shadow-lg">
+                      <div className="relative w-full h-full bg-gradient-to-br from-slate-400 to-slate-500 rounded-full flex items-center justify-center">
                         <BarChart3 className="h-12 w-12 text-white" />
                       </div>
                     </div>
@@ -597,13 +597,13 @@ export default function Home() {
                               <img 
                                 src={previewUrl} 
                                 alt="Analyzed image" 
-                                className="w-full h-full object-cover rounded-full shadow-xl" 
+                                className="w-full h-full object-cover rounded-full" 
                               />
                             </div>
                           </div>
                           
                           {/* Success Badge */}
-                          <div className="absolute -bottom-2 -right-2 bg-[#5bc0be] text-white rounded-full p-1.5 shadow-lg">
+                          <div className="absolute -bottom-2 -right-2 bg-[#5bc0be] text-white rounded-full p-1.5">
                             <CheckCircle className="h-3 w-3" />
                           </div>
                         </div>
@@ -619,8 +619,8 @@ export default function Home() {
                         variant={analysisResult.classification === 'Real Image' ? 'default' : 'destructive'}
                         className={`px-4 py-2 text-sm font-bold rounded-xl ${
                           analysisResult.classification === 'Real Image' 
-                            ? 'bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white shadow-lg' 
-                            : 'bg-gradient-to-r from-[#5bc0be]/70 to-[#4a9a98]/70 text-white shadow-lg'
+                            ? 'bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white' 
+                            : 'bg-gradient-to-r from-[#5bc0be]/70 to-[#4a9a98]/70 text-white'
                         }`}
                       >
                         {analysisResult.classification}
@@ -644,9 +644,9 @@ export default function Home() {
                       
                       {/* Enhanced Progress Bar */}
                       <div className="relative">
-                        <div className="w-full bg-slate-200 rounded-full h-4 overflow-hidden shadow-inner">
+                        <div className="w-full bg-slate-200 rounded-full h-4 overflow-hidden">
                           <div 
-                            className={`h-4 rounded-full transition-all duration-2000 ease-out shadow-lg ${
+                            className={`h-4 rounded-full transition-all duration-2000 ease-out ${
                               analysisResult.confidence >= 80 
                                 ? 'bg-gradient-to-r from-[#5bc0be] via-[#4a9a98] to-[#5bc0be]' 
                                 : analysisResult.confidence >= 60

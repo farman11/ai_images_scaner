@@ -103,8 +103,8 @@
   }
   
   .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-    transition: box-shadow 0.3s ease;
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
   }
 }
 

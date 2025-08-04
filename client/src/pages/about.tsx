@@ -21,11 +21,11 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-xl border-b border-white/20 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <Eye className="text-white h-5 w-5" />
               </div>
               <div>
@@ -129,7 +129,7 @@ export default function About() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <Building className="h-8 w-8 text-blue-600" />
@@ -141,7 +141,7 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <Lightbulb className="h-8 w-8 text-green-600" />
@@ -153,7 +153,7 @@ export default function About() {
               </CardContent>
             </Card>
 
-            <Card className="shadow-lg border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+            <Card className="border-0 bg-white/70 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
               <CardContent className="p-8 text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <Shield className="h-8 w-8 text-purple-600" />

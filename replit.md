@@ -5,6 +5,7 @@ This is an AI Image Detection Checker application that allows users to upload im
 # User Preferences
 
 Preferred communication style: Simple, everyday language.
+Design preference: Shadow-free, smooth design throughout the application (no shadow effects like shadow-sm, shadow-lg, shadow-xl).
 
 # System Architecture
 
@@ -81,3 +82,12 @@ Preferred communication style: Simple, everyday language.
 ## Session & Security
 - **connect-pg-simple**: PostgreSQL session store for Express sessions
 - **Express Session**: Server-side session management with secure cookie handling
+
+# Recent Changes
+
+## Shadow Removal Implementation (January 2025)
+- **Complete Shadow Elimination**: Removed all shadow effects across the entire application for a clean, smooth design
+- **Core Components Updated**: Modified card.tsx, dialog.tsx, toast.tsx, command.tsx UI components
+- **Page-Level Updates**: Updated all pages (home, about, how-it-works, faq) to remove shadow classes
+- **CSS Updates**: Cleaned index.css and component styles to eliminate all shadow variants
+- **Design Consistency**: Maintained gradient backgrounds and backdrop blur effects while removing all shadow styling
