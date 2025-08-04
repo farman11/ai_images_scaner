@@ -306,7 +306,7 @@ export default function Home() {
 <body>
     <div class="header">
         <h1>AI Image Detection Report</h1>
-        <p>Professional Computer Vision Analysis • RootGroup.tech</p>
+        <p>Professional Computer Vision Analysis</p>
     </div>
     
     <div class="container">
@@ -404,9 +404,7 @@ export default function Home() {
     </div>
     
     <div class="footer">
-        <p><strong>AI Detection Checker</strong> • RootGroup.tech</p>
-        <p>Advanced AI and Computer Vision Solutions</p>
-        <p>https://aidetectionchecker.replit.app/</p>
+        <p><strong>AI Detection Checker</strong></p>
     </div>
 </body>
 </html>`;
