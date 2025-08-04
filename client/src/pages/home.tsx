@@ -301,26 +301,58 @@ export default function Home() {
 
               {selectedFile && previewUrl && (
                 <div className="mt-6 space-y-4">
-                  {/* Image Preview */}
-                  <div className="relative group">
-                    <img 
-                      src={previewUrl} 
-                      alt="Selected image preview" 
-                      className="w-full h-64 object-cover rounded-xl shadow-lg border-2 border-gray-200 transition-all duration-300 group-hover:border-blue-300 group-hover:shadow-xl"
-                      data-testid="image-preview"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {/* Remove button overlay */}
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={removeFile}
-                      className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-600 hover:text-red-600 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
-                      data-testid="remove-image-button"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
+                  {/* Image Preview with Wave Animation */}
+                  <div className="relative flex justify-center">
+                    <div className="relative">
+                      {/* Animated Wave Rings */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-72 h-72 rounded-full border-2 border-blue-400/30 animate-ping animation-delay-75"></div>
+                        <div className="absolute w-64 h-64 rounded-full border-2 border-purple-400/30 animate-ping animation-delay-150"></div>
+                        <div className="absolute w-56 h-56 rounded-full border-2 border-indigo-400/30 animate-ping animation-delay-300"></div>
+                      </div>
+                      
+                      {/* Main Image Container */}
+                      <div className="relative w-48 h-48 mx-auto group">
+                        {/* Gradient Border */}
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 p-1 animate-pulse">
+                          <div className="w-full h-full rounded-full bg-white p-2">
+                            <img 
+                              src={previewUrl} 
+                              alt="Selected image preview" 
+                              className="w-full h-full object-cover rounded-full shadow-xl transition-all duration-500 group-hover:scale-105"
+                              data-testid="image-preview"
+                            />
+                          </div>
+                        </div>
+                        
+                        {/* Floating Particles Effect */}
+                        <div className="absolute -inset-4">
+                          <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-bounce animation-delay-100"></div>
+                          <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce animation-delay-200"></div>
+                          <div className="absolute bottom-6 left-8 w-1 h-1 bg-indigo-400 rounded-full animate-bounce animation-delay-300"></div>
+                          <div className="absolute bottom-4 right-4 w-2 h-2 bg-pink-400 rounded-full animate-bounce animation-delay-400"></div>
+                        </div>
+                        
+                        {/* Remove button overlay */}
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={removeFile}
+                          className="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110 z-10"
+                          data-testid="remove-image-button"
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
+                      </div>
+                      
+                      {/* Status Indicator */}
+                      <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                        <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-green-200">
+                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                          <span className="text-xs font-medium text-green-700">Image Ready</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   
                   {/* File Information Card */}
@@ -399,12 +431,32 @@ export default function Home() {
                 <div>
                   {/* Image Preview */}
                   {previewUrl && (
-                    <div className="mb-6">
-                      <img 
-                        src={previewUrl} 
-                        alt="Analyzed image" 
-                        className="w-full h-48 object-cover rounded-lg shadow-sm" 
-                      />
+                    <div className="mb-6 flex justify-center">
+                      <div className="relative">
+                        {/* Success Wave Animation */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="w-40 h-40 rounded-full border-2 border-green-400/30 animate-ping"></div>
+                          <div className="absolute w-32 h-32 rounded-full border-2 border-emerald-400/30 animate-ping animation-delay-75"></div>
+                        </div>
+                        
+                        {/* Analyzed Image */}
+                        <div className="relative w-32 h-32">
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 p-1">
+                            <div className="w-full h-full rounded-full bg-white p-1">
+                              <img 
+                                src={previewUrl} 
+                                alt="Analyzed image" 
+                                className="w-full h-full object-cover rounded-full shadow-xl" 
+                              />
+                            </div>
+                          </div>
+                          
+                          {/* Success Badge */}
+                          <div className="absolute -bottom-2 -right-2 bg-green-500 text-white rounded-full p-1.5 shadow-lg">
+                            <CheckCircle className="h-3 w-3" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   )}
 
