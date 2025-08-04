@@ -599,35 +599,7 @@ export default function Home() {
         />
       )}
 
-      {/* Left Side Ad */}
-      <div className="hidden xl:block fixed left-4 top-1/2 transform -translate-y-1/2 z-20">
-        <div className="w-32 h-[600px] bg-gradient-to-b from-white/90 to-slate-100/90 backdrop-blur-sm border border-slate-200 rounded-xl p-3">
-          <div className="w-full h-full bg-gradient-to-b from-[#5bc0be]/10 to-[#4a9a98]/10 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-[#5bc0be]/30">
-            <div className="text-xs font-semibold text-[#4a9a98] mb-2">Advertisement</div>
-            <div className="text-xs text-slate-500 mb-4">Google Ad Space</div>
-            <div className="w-16 h-16 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-lg flex items-center justify-center mb-3">
-              <span className="text-white font-bold text-xs">AD</span>
-            </div>
-            <div className="text-xs text-slate-400 leading-tight">160x600</div>
-            <div className="text-xs text-slate-400 leading-tight">Skyscraper</div>
-          </div>
-        </div>
-      </div>
 
-      {/* Right Side Ad */}
-      <div className="hidden xl:block fixed right-4 top-1/2 transform -translate-y-1/2 z-20">
-        <div className="w-32 h-[600px] bg-gradient-to-b from-white/90 to-slate-100/90 backdrop-blur-sm border border-slate-200 rounded-xl p-3">
-          <div className="w-full h-full bg-gradient-to-b from-[#5bc0be]/10 to-[#4a9a98]/10 rounded-lg flex flex-col items-center justify-center text-center border-2 border-dashed border-[#5bc0be]/30">
-            <div className="text-xs font-semibold text-[#4a9a98] mb-2">Advertisement</div>
-            <div className="text-xs text-slate-500 mb-4">Google Ad Space</div>
-            <div className="w-16 h-16 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-lg flex items-center justify-center mb-3">
-              <span className="text-white font-bold text-xs">AD</span>
-            </div>
-            <div className="text-xs text-slate-400 leading-tight">160x600</div>
-            <div className="text-xs text-slate-400 leading-tight">Skyscraper</div>
-          </div>
-        </div>
-      </div>
 
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-xl border-b border-white/20 relative z-10">
