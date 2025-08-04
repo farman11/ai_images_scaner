@@ -794,28 +794,28 @@ export default function Home() {
         {/* How It Works */}
         <Card className="mt-16 shadow-2xl border-0 bg-white/70 backdrop-blur-sm hover-glow">
           <CardContent className="p-8">
-            <h3 className="text-2xl font-semibold text-slate-900 text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <h3 className="text-2xl font-semibold text-slate-900 text-center mb-8 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] bg-clip-text text-transparent">
               How It Works
             </h3>
             <div className="grid md:grid-cols-4 gap-6">
               <div className="text-center group animate-bounce-in">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">1</div>
-                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Upload Image</h4>
+                <div className="w-12 h-12 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">1</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-[#5bc0be] transition-colors">Upload Image</h4>
                 <p className="text-sm text-slate-600">Select and upload your image file in JPG, PNG, JPEG, or WebP format.</p>
               </div>
               <div className="text-center group animate-bounce-in delay-200">
-                <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">2</div>
-                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">Multi-Algorithm Analysis</h4>
+                <div className="w-12 h-12 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">2</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-[#5bc0be] transition-colors">Multi-Algorithm Analysis</h4>
                 <p className="text-sm text-slate-600">6 advanced computer vision algorithms analyze texture patterns, compression signatures, and metadata.</p>
               </div>
               <div className="text-center group animate-bounce-in delay-400">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">3</div>
-                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">Get Results</h4>
+                <div className="w-12 h-12 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">3</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-[#5bc0be] transition-colors">Get Results</h4>
                 <p className="text-sm text-slate-600">Receive classification results with confidence score and detailed forensic indicators.</p>
               </div>
               <div className="text-center group animate-bounce-in delay-600">
-                <div className="w-12 h-12 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">4</div>
-                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-pink-600 transition-colors">Download Report</h4>
+                <div className="w-12 h-12 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">4</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-[#5bc0be] transition-colors">Download Report</h4>
                 <p className="text-sm text-slate-600">Optional detailed report with technical reasoning and computer vision analysis.</p>
               </div>
             </div>
