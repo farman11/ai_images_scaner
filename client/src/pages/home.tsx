@@ -253,18 +253,31 @@ export default function Home() {
                 onDragOver={handleDragOver}
                 onClick={() => fileInputRef.current?.click()}
               >
-                <div className="transform transition-all duration-300 hover:scale-110">
-                  <CloudUpload className={`
-                    mx-auto h-12 w-12 mb-4 transition-colors duration-300
-                    ${selectedFile ? 'text-green-500' : 'text-slate-400 hover:text-blue-500'}
-                  `} />
-                </div>
-                <h4 className="text-lg font-medium text-slate-700 mb-2">
-                  {selectedFile ? 'File Selected!' : 'Drop your image here'}
-                </h4>
-                <p className="text-slate-500 mb-4">
-                  {selectedFile ? 'Click to change file' : 'or click to browse'}
-                </p>
+                {!selectedFile ? (
+                  <>
+                    <div className="transform transition-all duration-300 hover:scale-110">
+                      <CloudUpload className="mx-auto h-12 w-12 mb-4 text-slate-400 hover:text-blue-500 transition-colors duration-300" />
+                    </div>
+                    <h4 className="text-lg font-medium text-slate-700 mb-2">
+                      Drop your image here
+                    </h4>
+                    <p className="text-slate-500 mb-4">
+                      or click to browse
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="transform transition-all duration-300 hover:scale-110">
+                      <CheckCircle className="mx-auto h-12 w-12 mb-4 text-green-500 transition-colors duration-300" />
+                    </div>
+                    <h4 className="text-lg font-medium text-green-700 mb-2">
+                      Image Selected Successfully!
+                    </h4>
+                    <p className="text-green-600 mb-4">
+                      Click to change or select a different image
+                    </p>
+                  </>
+                )}
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -285,25 +298,54 @@ export default function Home() {
                 <p className="text-xs text-slate-400 mt-3">Supports JPG, JPEG, PNG, WebP • Max 10MB</p>
               </div>
 
-              {selectedFile && (
-                <div className="mt-6">
-                  <div className="bg-slate-50 rounded-lg p-4">
+              {selectedFile && previewUrl && (
+                <div className="mt-6 space-y-4">
+                  {/* Image Preview */}
+                  <div className="relative group">
+                    <img 
+                      src={previewUrl} 
+                      alt="Selected image preview" 
+                      className="w-full h-64 object-cover rounded-xl shadow-lg border-2 border-gray-200 transition-all duration-300 group-hover:border-blue-300 group-hover:shadow-xl"
+                      data-testid="image-preview"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Remove button overlay */}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={removeFile}
+                      className="absolute top-3 right-3 bg-white/90 hover:bg-white text-gray-600 hover:text-red-600 rounded-full p-2 shadow-lg transition-all duration-200 hover:scale-110"
+                      data-testid="remove-image-button"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
+                  </div>
+                  
+                  {/* File Information Card */}
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <ImageIcon className="h-5 w-5 text-slate-500" />
+                        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-800 rounded-lg flex items-center justify-center">
+                          <ImageIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                        </div>
                         <div>
-                          <p className="font-medium text-slate-700">{selectedFile.name}</p>
-                          <p className="text-sm text-slate-500">{formatFileSize(selectedFile.size)}</p>
+                          <p className="font-semibold text-gray-900 dark:text-gray-100 truncate max-w-[200px]" title={selectedFile.name}>
+                            {selectedFile.name}
+                          </p>
+                          <div className="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400">
+                            <span>{formatFileSize(selectedFile.size)}</span>
+                            <span>•</span>
+                            <span className="capitalize">{selectedFile.type.split('/')[1]}</span>
+                          </div>
                         </div>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={removeFile}
-                        className="text-slate-400 hover:text-slate-600"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
+                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1 text-green-600 dark:text-green-400">
+                          <CheckCircle className="h-4 w-4" />
+                          <span className="text-sm font-medium">Ready</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -317,10 +359,12 @@ export default function Home() {
                   bg-gradient-to-r from-blue-600 to-indigo-600 
                   hover:from-blue-700 hover:to-indigo-700
                   transform transition-all duration-300 hover:scale-105 hover:shadow-xl
-                  disabled:hover:scale-100 disabled:hover:shadow-md
+                  disabled:hover:scale-100 disabled:hover:shadow-md disabled:opacity-50
                   ${isAnalyzing ? 'animate-pulse' : ''}
+                  ${selectedFile ? 'ring-2 ring-blue-200 ring-offset-2' : ''}
                 `}
                 size="lg"
+                data-testid="analyze-image-button"
               >
                 {analyzeImageMutation.isPending ? (
                   <>
@@ -330,7 +374,7 @@ export default function Home() {
                 ) : (
                   <>
                     <Microscope className="mr-3 h-5 w-5" />
-                    Analyze Image
+                    {selectedFile ? 'Start AI Analysis' : 'Select Image First'}
                   </>
                 )}
               </Button>
