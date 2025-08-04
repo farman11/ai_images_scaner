@@ -77,11 +77,11 @@ export default function Home() {
 
   const handleFileSelect = (file: File) => {
     // Validate file type
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     if (!validTypes.includes(file.type)) {
       toast({
         title: "Invalid File Type",
-        description: "Please select a JPG, JPEG, or PNG image file",
+        description: "Please select a JPG, JPEG, PNG, or WebP image file",
         variant: "destructive",
       });
       return;
@@ -219,7 +219,7 @@ export default function Home() {
                   type="file"
                   ref={fileInputRef}
                   className="hidden"
-                  accept=".jpg,.jpeg,.png"
+                  accept=".jpg,.jpeg,.png,.webp"
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       handleFileSelect(e.target.files[0]);
@@ -229,7 +229,7 @@ export default function Home() {
                 <Button type="button">
                   Choose File
                 </Button>
-                <p className="text-xs text-slate-400 mt-3">Supports JPG, JPEG, PNG • Max 10MB</p>
+                <p className="text-xs text-slate-400 mt-3">Supports JPG, JPEG, PNG, WebP • Max 10MB</p>
               </div>
 
               {selectedFile && (
