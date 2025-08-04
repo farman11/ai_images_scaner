@@ -118,3 +118,11 @@ Design preference: Shadow-free, smooth design throughout the application (no sha
 - **Visual Indicators**: Color-coded classification badges, progress bars, and warning sections
 - **Complete Analysis**: Includes methodology, key indicators, disclaimers, and technical specifications
 - **Professional Styling**: Corporate design with gradients, structured sections, and responsive layout
+
+## Vertical Google Ads Implementation (January 2025)
+- **Side Ad Placement**: Fixed vertical ad spaces on left and right sides of main content
+- **Responsive Design**: Ads only visible on XL screens (1280px+) to maintain mobile experience
+- **Professional Styling**: Glassmorphism design with brand colors and backdrop blur effects
+- **Standard Format**: 160x600 Skyscraper ad format for optimal Google AdSense integration
+- **Non-Intrusive**: Fixed positioning ensures ads don't interfere with main content flow
+- **Brand Consistency**: Uses teal gradient colors matching overall design theme
