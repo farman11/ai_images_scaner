@@ -207,11 +207,11 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-16">
             <div className="flex items-center space-x-3 group">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+              <div className="w-10 h-10 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <Eye className="text-white h-5 w-5" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">AI Detection Checker</h1>
+                <h1 className="text-xl font-bold text-slate-900 group-hover:text-[#5bc0be] transition-colors">AI Detection Checker</h1>
                 <p className="text-sm text-slate-500">Verify image authenticity</p>
               </div>
             </div>
@@ -222,7 +222,7 @@ export default function Home() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         {/* Hero Section */}
         <div className="text-center mb-12 animate-fade-in-up">
-          <h2 className="text-4xl font-bold text-slate-900 mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent animate-pulse">
+          <h2 className="text-4xl font-bold text-slate-900 mb-4 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] bg-clip-text text-transparent animate-pulse">
             Detect AI-Generated Images
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
@@ -233,16 +233,16 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Upload Section */}
           <div className="space-y-6">
-            <Card className="shadow-2xl border-0 bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/30 backdrop-blur-xl border border-white/20">
+            <Card className="shadow-2xl border-0 bg-gradient-to-br from-white via-[#5bc0be]/10 to-[#4a9a98]/10 backdrop-blur-xl border border-white/20">
               <CardContent className="p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3 shadow-lg">
                       <Upload className="h-5 w-5 text-white" />
                     </div>
                     Upload Image
                   </h3>
-                  <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                  <Badge variant="outline" className="bg-[#5bc0be]/10 text-[#4a9a98] border-[#5bc0be]/30">
                     Step 1
                   </Badge>
                 </div>
@@ -257,8 +257,8 @@ export default function Home() {
                     <div 
                       className={`h-2 rounded-full transition-all duration-1000 ease-out ${
                         selectedFile 
-                          ? 'w-full bg-gradient-to-r from-green-500 to-emerald-500' 
-                          : 'w-0 bg-gradient-to-r from-blue-500 to-indigo-500'
+                          ? 'w-full bg-gradient-to-r from-[#5bc0be] to-[#4a9a98]' 
+                          : 'w-0 bg-gradient-to-r from-[#5bc0be]/60 to-[#4a9a98]/60'
                       }`}
                     />
                   </div>
@@ -269,8 +269,8 @@ export default function Home() {
                     relative border-2 border-dashed rounded-2xl p-12 text-center cursor-pointer
                     transition-all duration-500 transform group
                     ${selectedFile 
-                      ? 'border-green-400 bg-gradient-to-br from-green-50 to-emerald-50 scale-[1.02] shadow-lg' 
-                      : 'border-slate-300 hover:border-blue-400 hover:bg-gradient-to-br hover:from-blue-50 hover:to-indigo-50 hover:scale-[1.02] hover:shadow-xl'
+                      ? 'border-[#5bc0be] bg-gradient-to-br from-[#5bc0be]/20 to-[#4a9a98]/20 scale-[1.02] shadow-lg' 
+                      : 'border-slate-300 hover:border-[#5bc0be] hover:bg-gradient-to-br hover:from-[#5bc0be]/10 hover:to-[#4a9a98]/10 hover:scale-[1.02] hover:shadow-xl'
                     }
                   `}
                   onDrop={handleDrop}
@@ -284,8 +284,8 @@ export default function Home() {
                     <>
                       <div className="relative">
                         <div className="w-20 h-20 mx-auto mb-6 relative">
-                          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-full opacity-20 animate-ping"></div>
-                          <div className="relative w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full opacity-20 animate-ping"></div>
+                          <div className="relative w-full h-full bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
                             <CloudUpload className="h-10 w-10 text-white" />
                           </div>
                         </div>
@@ -301,15 +301,15 @@ export default function Home() {
                     <>
                       <div className="relative">
                         <div className="w-20 h-20 mx-auto mb-6 relative">
-                          <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full opacity-20 animate-ping"></div>
-                          <div className="relative w-full h-full bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center shadow-xl">
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full opacity-20 animate-ping"></div>
+                          <div className="relative w-full h-full bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-full flex items-center justify-center shadow-xl">
                             <CheckCircle className="h-10 w-10 text-white" />
                           </div>
                         </div>
-                        <h4 className="text-xl font-bold text-green-800 mb-3">
+                        <h4 className="text-xl font-bold text-[#4a9a98] mb-3">
                           Image Ready for Analysis
                         </h4>
-                        <p className="text-green-700 mb-6">
+                        <p className="text-[#5bc0be] mb-6">
                           Click to select a different image
                         </p>
                       </div>
@@ -331,7 +331,7 @@ export default function Home() {
                   <Button 
                     type="button" 
                     size="lg"
-                    className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:via-indigo-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
+                    className="bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] hover:from-[#4a9a98] hover:to-[#3a7875] text-white font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
                   >
                     <Upload className="w-5 h-5 mr-2" />
                     Choose File
@@ -339,15 +339,15 @@ export default function Home() {
                   
                   <div className="mt-6 flex items-center justify-center space-x-4 text-xs text-slate-500">
                     <div className="flex items-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                      <div className="w-2 h-2 bg-[#5bc0be] rounded-full mr-2"></div>
                       JPG, PNG, WebP
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                      <div className="w-2 h-2 bg-[#4a9a98] rounded-full mr-2"></div>
                       Max 10MB
                     </div>
                     <div className="flex items-center">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full mr-2"></div>
+                      <div className="w-2 h-2 bg-[#5bc0be] rounded-full mr-2"></div>
                       High Quality
                     </div>
                   </div>
@@ -360,15 +360,15 @@ export default function Home() {
                     <div className="relative">
                       {/* Animated Wave Rings */}
                       <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-72 h-72 rounded-full border-2 border-blue-400/30 animate-ping animation-delay-75"></div>
-                        <div className="absolute w-64 h-64 rounded-full border-2 border-purple-400/30 animate-ping animation-delay-150"></div>
-                        <div className="absolute w-56 h-56 rounded-full border-2 border-indigo-400/30 animate-ping animation-delay-300"></div>
+                        <div className="w-72 h-72 rounded-full border-2 border-[#5bc0be]/30 animate-ping animation-delay-75"></div>
+                        <div className="absolute w-64 h-64 rounded-full border-2 border-[#4a9a98]/30 animate-ping animation-delay-150"></div>
+                        <div className="absolute w-56 h-56 rounded-full border-2 border-[#5bc0be]/40 animate-ping animation-delay-300"></div>
                       </div>
                       
                       {/* Main Image Container */}
                       <div className="relative w-48 h-48 mx-auto group">
                         {/* Gradient Border */}
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500 p-1 animate-pulse">
+                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#5bc0be] via-[#4a9a98] to-[#5bc0be] p-1 animate-pulse">
                           <div className="w-full h-full rounded-full bg-white p-2">
                             <img 
                               src={previewUrl} 
@@ -381,10 +381,10 @@ export default function Home() {
                         
                         {/* Floating Particles Effect */}
                         <div className="absolute -inset-4">
-                          <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-bounce animation-delay-100"></div>
-                          <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce animation-delay-200"></div>
-                          <div className="absolute bottom-6 left-8 w-1 h-1 bg-indigo-400 rounded-full animate-bounce animation-delay-300"></div>
-                          <div className="absolute bottom-4 right-4 w-2 h-2 bg-pink-400 rounded-full animate-bounce animation-delay-400"></div>
+                          <div className="absolute top-4 left-4 w-2 h-2 bg-[#5bc0be] rounded-full animate-bounce animation-delay-100"></div>
+                          <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-[#4a9a98] rounded-full animate-bounce animation-delay-200"></div>
+                          <div className="absolute bottom-6 left-8 w-1 h-1 bg-[#5bc0be] rounded-full animate-bounce animation-delay-300"></div>
+                          <div className="absolute bottom-4 right-4 w-2 h-2 bg-[#4a9a98] rounded-full animate-bounce animation-delay-400"></div>
                         </div>
                         
                         {/* Remove button overlay */}
@@ -401,20 +401,20 @@ export default function Home() {
                       
                       {/* Status Indicator */}
                       <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-                        <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-green-200">
-                          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                          <span className="text-xs font-medium text-green-700">Image Ready</span>
+                        <div className="flex items-center space-x-2 bg-white/90 backdrop-blur-sm rounded-full px-4 py-2 shadow-lg border border-[#5bc0be]/40">
+                          <div className="w-2 h-2 bg-[#5bc0be] rounded-full animate-pulse"></div>
+                          <span className="text-xs font-medium text-[#4a9a98]">Image Ready</span>
                         </div>
                       </div>
                     </div>
                   </div>
                   
                   {/* File Information Card */}
-                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
+                  <div className="bg-gradient-to-r from-[#5bc0be]/20 to-[#4a9a98]/20 dark:from-[#5bc0be]/10 dark:to-[#4a9a98]/10 rounded-xl p-4 border border-[#5bc0be]/30 dark:border-[#5bc0be]/20">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-800 rounded-lg flex items-center justify-center">
-                          <ImageIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                        <div className="w-10 h-10 bg-[#5bc0be]/30 dark:bg-[#5bc0be]/20 rounded-lg flex items-center justify-center">
+                          <ImageIcon className="h-5 w-5 text-[#4a9a98] dark:text-[#5bc0be]" />
                         </div>
                         <div>
                           <p className="font-semibold text-gray-900 dark:text-gray-100 truncate max-w-[200px]" title={selectedFile.name}>
@@ -428,7 +428,7 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <div className="flex items-center space-x-1 text-green-600 dark:text-green-400">
+                        <div className="flex items-center space-x-1 text-[#5bc0be] dark:text-[#5bc0be]">
                           <CheckCircle className="h-4 w-4" />
                           <span className="text-sm font-medium">Ready</span>
                         </div>
@@ -442,16 +442,16 @@ export default function Home() {
             </Card>
 
             {/* Analysis Action Card */}
-            <Card className="shadow-2xl border-0 bg-gradient-to-br from-indigo-50 via-purple-50/30 to-pink-50/30 backdrop-blur-xl border border-white/20">
+            <Card className="shadow-2xl border-0 bg-gradient-to-br from-[#5bc0be]/10 via-[#4a9a98]/10 to-[#5bc0be]/5 backdrop-blur-xl border border-white/20">
               <CardContent className="p-8">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-bold text-slate-900 flex items-center">
-                    <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3 shadow-lg">
                       <Microscope className="h-5 w-5 text-white" />
                     </div>
                     Start Analysis
                   </h3>
-                  <Badge variant="outline" className="bg-indigo-50 text-indigo-700 border-indigo-200">
+                  <Badge variant="outline" className="bg-[#5bc0be]/10 text-[#4a9a98] border-[#5bc0be]/30">
                     Step 2
                   </Badge>
                 </div>
@@ -468,11 +468,11 @@ export default function Home() {
                     <div 
                       className={`h-2 rounded-full transition-all duration-1000 ease-out ${
                         analysisResult 
-                          ? 'w-full bg-gradient-to-r from-green-500 to-emerald-500' 
+                          ? 'w-full bg-gradient-to-r from-[#5bc0be] to-[#4a9a98]' 
                           : analyzeImageMutation.isPending
-                          ? 'w-3/4 bg-gradient-to-r from-yellow-500 to-orange-500 animate-pulse'
+                          ? 'w-3/4 bg-gradient-to-r from-[#5bc0be]/70 to-[#4a9a98]/70 animate-pulse'
                           : selectedFile
-                          ? 'w-1/4 bg-gradient-to-r from-blue-500 to-indigo-500'
+                          ? 'w-1/4 bg-gradient-to-r from-[#5bc0be]/50 to-[#4a9a98]/50'
                           : 'w-0 bg-slate-300'
                       }`}
                     />
@@ -485,12 +485,12 @@ export default function Home() {
                   size="lg"
                   className={`
                     w-full py-4 text-lg font-bold rounded-xl
-                    bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 
-                    hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700
+                    bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] 
+                    hover:from-[#4a9a98] hover:to-[#3a7875]
                     transform transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl
                     disabled:hover:scale-100 disabled:hover:shadow-lg disabled:opacity-60
                     ${isAnalyzing ? 'animate-pulse shadow-2xl' : 'shadow-xl'}
-                    ${selectedFile ? 'ring-2 ring-indigo-200 ring-offset-2' : ''}
+                    ${selectedFile ? 'ring-2 ring-[#5bc0be]/30 ring-offset-2' : ''}
                   `}
                   data-testid="analyze-image-button"
                 >
@@ -512,19 +512,19 @@ export default function Home() {
                 {/* Analysis Features */}
                 <div className="mt-6 grid grid-cols-2 gap-4">
                   <div className="flex items-center space-x-2 text-sm text-slate-600">
-                    <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#5bc0be] rounded-full"></div>
                     <span>6 AI Algorithms</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-slate-600">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#4a9a98] rounded-full"></div>
                     <span>Deep Learning</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-slate-600">
-                    <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#5bc0be] rounded-full"></div>
                     <span>Forensics Analysis</span>
                   </div>
                   <div className="flex items-center space-x-2 text-sm text-slate-600">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <div className="w-2 h-2 bg-[#4a9a98] rounded-full"></div>
                     <span>96.8% Accuracy</span>
                   </div>
                 </div>
@@ -533,16 +533,16 @@ export default function Home() {
           </div>
 
           {/* Results Section */}
-          <Card className="shadow-2xl border-0 bg-gradient-to-br from-white via-emerald-50/30 to-green-50/30 backdrop-blur-xl border border-white/20">
+          <Card className="shadow-2xl border-0 bg-gradient-to-br from-white via-[#5bc0be]/10 to-[#4a9a98]/10 backdrop-blur-xl border border-white/20">
             <CardContent className="p-8">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-2xl font-bold text-slate-900 flex items-center">
-                  <div className="w-10 h-10 bg-gradient-to-br from-emerald-600 to-green-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#5bc0be] to-[#4a9a98] rounded-xl flex items-center justify-center mr-3 shadow-lg">
                     <BarChart3 className="h-5 w-5 text-white" />
                   </div>
                   Analysis Results
                 </h3>
-                <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">
+                <Badge variant="outline" className="bg-[#5bc0be]/10 text-[#4a9a98] border-[#5bc0be]/30">
                   Step 3
                 </Badge>
               </div>
@@ -564,17 +564,17 @@ export default function Home() {
                   
                   {/* Preview Features */}
                   <div className="mt-8 grid grid-cols-1 gap-4 max-w-md mx-auto">
-                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
-                      <span className="text-sm font-medium text-blue-700">Classification Result</span>
-                      <div className="w-16 h-2 bg-blue-200 rounded-full"></div>
+                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#5bc0be]/20 to-[#4a9a98]/20 rounded-xl border border-[#5bc0be]/30">
+                      <span className="text-sm font-medium text-[#4a9a98]">Classification Result</span>
+                      <div className="w-16 h-2 bg-[#5bc0be]/40 rounded-full"></div>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-100">
-                      <span className="text-sm font-medium text-green-700">Confidence Score</span>
-                      <div className="w-20 h-2 bg-green-200 rounded-full"></div>
+                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#5bc0be]/20 to-[#4a9a98]/20 rounded-xl border border-[#5bc0be]/30">
+                      <span className="text-sm font-medium text-[#4a9a98]">Confidence Score</span>
+                      <div className="w-20 h-2 bg-[#5bc0be]/40 rounded-full"></div>
                     </div>
-                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl border border-purple-100">
-                      <span className="text-sm font-medium text-purple-700">Forensic Indicators</span>
-                      <div className="w-12 h-2 bg-purple-200 rounded-full"></div>
+                    <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#5bc0be]/20 to-[#4a9a98]/20 rounded-xl border border-[#5bc0be]/30">
+                      <span className="text-sm font-medium text-[#4a9a98]">Forensic Indicators</span>
+                      <div className="w-12 h-2 bg-[#5bc0be]/40 rounded-full"></div>
                     </div>
                   </div>
                 </div>
@@ -586,13 +586,13 @@ export default function Home() {
                       <div className="relative">
                         {/* Success Wave Animation */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-40 h-40 rounded-full border-2 border-green-400/30 animate-ping"></div>
-                          <div className="absolute w-32 h-32 rounded-full border-2 border-emerald-400/30 animate-ping animation-delay-75"></div>
+                          <div className="w-40 h-40 rounded-full border-2 border-[#5bc0be]/30 animate-ping"></div>
+                          <div className="absolute w-32 h-32 rounded-full border-2 border-[#4a9a98]/30 animate-ping animation-delay-75"></div>
                         </div>
                         
                         {/* Analyzed Image */}
                         <div className="relative w-32 h-32">
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 p-1">
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] p-1">
                             <div className="w-full h-full rounded-full bg-white p-1">
                               <img 
                                 src={previewUrl} 
@@ -603,7 +603,7 @@ export default function Home() {
                           </div>
                           
                           {/* Success Badge */}
-                          <div className="absolute -bottom-2 -right-2 bg-green-500 text-white rounded-full p-1.5 shadow-lg">
+                          <div className="absolute -bottom-2 -right-2 bg-[#5bc0be] text-white rounded-full p-1.5 shadow-lg">
                             <CheckCircle className="h-3 w-3" />
                           </div>
                         </div>
@@ -619,8 +619,8 @@ export default function Home() {
                         variant={analysisResult.classification === 'Real Image' ? 'default' : 'destructive'}
                         className={`px-4 py-2 text-sm font-bold rounded-xl ${
                           analysisResult.classification === 'Real Image' 
-                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg' 
-                            : 'bg-gradient-to-r from-red-500 to-pink-500 text-white shadow-lg'
+                            ? 'bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white shadow-lg' 
+                            : 'bg-gradient-to-r from-[#5bc0be]/70 to-[#4a9a98]/70 text-white shadow-lg'
                         }`}
                       >
                         {analysisResult.classification}
@@ -635,7 +635,7 @@ export default function Home() {
                           <p className="text-slate-500 text-sm">AI Detection Accuracy</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-4xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                          <span className="text-4xl font-black bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] bg-clip-text text-transparent">
                             {analysisResult.confidence}%
                           </span>
                           <p className="text-slate-500 text-sm">Confidence</p>
@@ -648,10 +648,10 @@ export default function Home() {
                           <div 
                             className={`h-4 rounded-full transition-all duration-2000 ease-out shadow-lg ${
                               analysisResult.confidence >= 80 
-                                ? 'bg-gradient-to-r from-green-500 via-emerald-500 to-green-600' 
+                                ? 'bg-gradient-to-r from-[#5bc0be] via-[#4a9a98] to-[#5bc0be]' 
                                 : analysisResult.confidence >= 60
-                                ? 'bg-gradient-to-r from-yellow-500 via-orange-500 to-yellow-600'
-                                : 'bg-gradient-to-r from-red-500 via-pink-500 to-red-600'
+                                ? 'bg-gradient-to-r from-[#5bc0be]/80 via-[#4a9a98]/80 to-[#5bc0be]/80'
+                                : 'bg-gradient-to-r from-[#5bc0be]/60 via-[#4a9a98]/60 to-[#5bc0be]/60'
                             }`}
                             style={{ width: `${analysisResult.confidence}%` }}
                           />
@@ -669,32 +669,32 @@ export default function Home() {
                   <div className="mb-8">
                     <h4 className="text-xl font-bold text-slate-800 mb-4">Technical Analysis</h4>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+                      <div className="p-4 bg-gradient-to-br from-[#5bc0be]/20 to-[#4a9a98]/20 rounded-xl border border-[#5bc0be]/30">
                         <div className="flex items-center mb-2">
-                          <Clock className="h-5 w-5 text-blue-600 mr-2" />
-                          <span className="text-sm font-semibold text-blue-700">Processing Time</span>
+                          <Clock className="h-5 w-5 text-[#4a9a98] mr-2" />
+                          <span className="text-sm font-semibold text-[#4a9a98]">Processing Time</span>
                         </div>
-                        <span className="text-2xl font-bold text-blue-900">
+                        <span className="text-2xl font-bold text-[#5bc0be]">
                           {analysisResult.processingTime.toFixed(1)}s
                         </span>
                       </div>
                       
-                      <div className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-100">
+                      <div className="p-4 bg-gradient-to-br from-[#5bc0be]/20 to-[#4a9a98]/20 rounded-xl border border-[#5bc0be]/30">
                         <div className="flex items-center mb-2">
-                          <ImageIcon className="h-5 w-5 text-green-600 mr-2" />
-                          <span className="text-sm font-semibold text-green-700">Image Size</span>
+                          <ImageIcon className="h-5 w-5 text-[#4a9a98] mr-2" />
+                          <span className="text-sm font-semibold text-[#4a9a98]">Image Size</span>
                         </div>
-                        <span className="text-lg font-bold text-green-900">
+                        <span className="text-lg font-bold text-[#5bc0be]">
                           {analysisResult.imageSize}
                         </span>
                       </div>
                       
-                      <div className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border border-purple-100">
+                      <div className="p-4 bg-gradient-to-br from-[#5bc0be]/20 to-[#4a9a98]/20 rounded-xl border border-[#5bc0be]/30">
                         <div className="flex items-center mb-2">
-                          <Cpu className="h-5 w-5 text-purple-600 mr-2" />
-                          <span className="text-sm font-semibold text-purple-700">Method</span>
+                          <Cpu className="h-5 w-5 text-[#4a9a98] mr-2" />
+                          <span className="text-sm font-semibold text-[#4a9a98]">Method</span>
                         </div>
-                        <span className="text-sm font-bold text-purple-900">
+                        <span className="text-sm font-bold text-[#5bc0be]">
                           Multi-Algorithm CV
                         </span>
                       </div>
