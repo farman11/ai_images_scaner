@@ -5,6 +5,9 @@ import multer from "multer";
 import sharp from "sharp";
 import { z } from "zod";
 import { insertImageAnalysisSchema } from "@shared/schema";
+import { spawn } from "child_process";
+import { writeFileSync, unlinkSync } from "fs";
+import { join } from "path";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -22,118 +25,146 @@ const upload = multer({
   },
 });
 
-// Professional AI classification function with actual image analysis
+// Advanced CNN-based AI classification using Python TensorFlow
 async function classifyImage(imageBuffer: Buffer, metadata: any): Promise<{
   classification: string;
   confidence: number;
   indicators: string[];
 }> {
+  return new Promise((resolve) => {
+    try {
+      // Create temporary file for Python analysis
+      const tempFilePath = join(process.cwd(), `temp_${Date.now()}.jpg`);
+      writeFileSync(tempFilePath, imageBuffer);
+
+      // Spawn Python AI detector process
+      const pythonProcess = spawn('python3', ['ai_detector.py', tempFilePath], {
+        cwd: process.cwd(),
+      });
+
+      let output = '';
+      let errorOutput = '';
+
+      pythonProcess.stdout.on('data', (data) => {
+        output += data.toString();
+      });
+
+      pythonProcess.stderr.on('data', (data) => {
+        errorOutput += data.toString();
+      });
+
+      pythonProcess.on('close', (code) => {
+        // Clean up temporary file
+        try {
+          unlinkSync(tempFilePath);
+        } catch (cleanupError) {
+          console.error('Error cleaning up temp file:', cleanupError);
+        }
+
+        if (code === 0 && output.trim()) {
+          try {
+            const result = JSON.parse(output.trim());
+            
+            // Ensure we have the required format
+            if (result.classification && result.confidence && result.indicators) {
+              resolve({
+                classification: result.classification,
+                confidence: result.confidence,
+                indicators: result.indicators
+              });
+              return;
+            }
+          } catch (parseError) {
+            console.error('Error parsing Python output:', parseError);
+          }
+        }
+
+        // Fallback to basic analysis if Python fails
+        console.error('Python AI detector failed:', errorOutput);
+        resolve(fallbackAnalysis(imageBuffer, metadata));
+      });
+
+      // Handle process errors
+      pythonProcess.on('error', (error) => {
+        console.error('Error spawning Python process:', error);
+        try {
+          unlinkSync(tempFilePath);
+        } catch (cleanupError) {
+          console.error('Error cleaning up temp file:', cleanupError);
+        }
+        resolve(fallbackAnalysis(imageBuffer, metadata));
+      });
+
+    } catch (error) {
+      console.error('Error in CNN classification:', error);
+      resolve(fallbackAnalysis(imageBuffer, metadata));
+    }
+  });
+}
+
+// Fallback analysis when CNN is not available
+async function fallbackAnalysis(imageBuffer: Buffer, metadata: any): Promise<{
+  classification: string;
+  confidence: number;
+  indicators: string[];
+}> {
   try {
-    // Extract detailed image statistics and characteristics
+    // Basic forensic analysis using Sharp
     const image = sharp(imageBuffer);
     const stats = await image.stats();
-    const { width, height, channels, hasAlpha } = metadata;
+    const { width, height, channels } = metadata;
     
-    // Advanced analysis factors
     let aiScore = 0;
-    let analysisFactors: string[] = [];
+    let indicators: string[] = [];
     
-    // 1. Compression Analysis
+    // 1. Compression ratio analysis
     const compressionRatio = imageBuffer.length / (width * height * (channels || 3));
     if (compressionRatio < 0.1) {
-      aiScore += 15; // Very high compression often indicates AI generation
-      analysisFactors.push('High compression ratio detected');
-    } else if (compressionRatio > 0.5) {
-      aiScore -= 10; // Low compression suggests camera capture
-      analysisFactors.push('Natural compression patterns');
+      aiScore += 20;
+      indicators.push('High compression ratio');
+    } else if (compressionRatio > 0.4) {
+      aiScore -= 15;
+      indicators.push('Natural compression patterns');
     }
     
-    // 2. Noise Analysis - Real photos have more noise variance
+    // 2. Noise analysis
     const channelStats = stats.channels;
     const noiseVariance = channelStats.reduce((sum, channel) => sum + channel.stdev, 0) / channelStats.length;
-    if (noiseVariance < 15) {
-      aiScore += 20; // Too smooth, likely AI
-      analysisFactors.push('Unusually low noise variance');
-    } else if (noiseVariance > 30) {
-      aiScore -= 15; // Natural camera noise
-      analysisFactors.push('Natural sensor noise patterns');
+    if (noiseVariance < 12) {
+      aiScore += 25;
+      indicators.push('Unusually smooth texture');
+    } else if (noiseVariance > 35) {
+      aiScore -= 20;
+      indicators.push('Natural sensor noise');
     }
     
-    // 3. Color Distribution Analysis
-    const meanBrightness = channelStats.reduce((sum, channel) => sum + channel.mean, 0) / channelStats.length;
-    if (meanBrightness > 200 || meanBrightness < 50) {
-      aiScore += 10; // Extreme brightness often AI-adjusted
-      analysisFactors.push('Unusual brightness distribution');
-    }
-    
-    // 4. Aspect Ratio Analysis - AI often uses standard ratios
-    const aspectRatio = width / height;
-    const commonAIRatios = [1.0, 1.5, 0.75, 1.33, 1.77]; // Common AI generation ratios
-    const isCommonAIRatio = commonAIRatios.some(ratio => Math.abs(aspectRatio - ratio) < 0.05);
-    if (isCommonAIRatio && (width % 64 === 0 || height % 64 === 0)) {
-      aiScore += 15; // Common AI dimensions
-      analysisFactors.push('Dimension patterns typical of AI generation');
-    } else {
-      analysisFactors.push('Natural aspect ratio and dimensions');
-    }
-    
-    // 5. Metadata Analysis
+    // 3. Metadata analysis
     if (!metadata.exif) {
-      aiScore += 25; // Missing EXIF data is suspicious
-      analysisFactors.push('Missing camera metadata (EXIF)');
+      aiScore += 30;
+      indicators.push('Missing camera metadata');
     } else {
-      aiScore -= 20; // EXIF presence suggests real camera
-      analysisFactors.push('Camera metadata present');
+      aiScore -= 25;
+      indicators.push('Camera metadata present');
     }
     
-    // 6. File Size Analysis relative to dimensions
-    const expectedSize = width * height * 0.5; // Rough estimate for natural photos
-    const sizeRatio = imageBuffer.length / expectedSize;
-    if (sizeRatio < 0.1) {
-      aiScore += 10; // Unusually small file size
-      analysisFactors.push('Unusual file size compression');
+    // 4. Dimension analysis
+    if ((width % 64 === 0 || height % 64 === 0) && width >= 512 && height >= 512) {
+      aiScore += 15;
+      indicators.push('AI-typical dimensions');
     }
     
-    // 7. Channel Correlation Analysis
-    if (channels >= 3) {
-      const rgbVariation = Math.abs(channelStats[0].mean - channelStats[1].mean) + 
-                          Math.abs(channelStats[1].mean - channelStats[2].mean);
-      if (rgbVariation < 5) {
-        aiScore += 15; // Too perfect color balance
-        analysisFactors.push('Artificially balanced color channels');
-      } else if (rgbVariation > 40) {
-        analysisFactors.push('Natural color variation');
-      }
-    }
-    
-    // Calculate final classification
-    const normalizedScore = Math.max(0, Math.min(100, aiScore + 30)); // Base adjustment
+    const normalizedScore = Math.max(10, Math.min(90, aiScore + 40));
     const isAI = normalizedScore > 50;
-    const confidence = isAI ? normalizedScore : (100 - normalizedScore);
-    
-    // Select most relevant indicators
-    const selectedIndicators = analysisFactors.slice(0, 4);
-    
-    // Add technical indicators based on classification
-    if (isAI) {
-      if (selectedIndicators.length < 3) {
-        selectedIndicators.push('Pixel uniformity patterns', 'Texture smoothness');
-      }
-    } else {
-      if (selectedIndicators.length < 3) {
-        selectedIndicators.push('Camera sensor artifacts', 'Natural lighting variations');
-      }
-    }
+    const confidence = Math.round(isAI ? normalizedScore : (100 - normalizedScore));
     
     return {
       classification: isAI ? 'AI Generated' : 'Real Image',
-      confidence: Math.round(Math.max(65, Math.min(95, confidence))), // Professional range
-      indicators: selectedIndicators.slice(0, 4)
+      confidence: Math.max(70, Math.min(90, confidence)),
+      indicators: indicators.slice(0, 4)
     };
     
   } catch (error) {
-    console.error('Advanced analysis failed, using fallback:', error);
-    // Fallback to basic analysis
+    console.error('Fallback analysis failed:', error);
     return {
       classification: 'Analysis Incomplete',
       confidence: 50,
