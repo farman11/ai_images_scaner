@@ -205,7 +205,7 @@ export default function Home() {
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-center items-center h-16">
             <div className="flex items-center space-x-3 group">
               <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <Eye className="text-white h-5 w-5" />
@@ -215,11 +215,6 @@ export default function Home() {
                 <p className="text-sm text-slate-500">Verify image authenticity</p>
               </div>
             </div>
-            <nav className="hidden md:flex items-center space-x-6">
-              <Link href="/how-it-works" className="text-slate-600 hover:text-slate-900 font-medium">How it works</Link>
-              <Link href="/about" className="text-slate-600 hover:text-slate-900 font-medium">About</Link>
-              <Link href="/faq" className="text-slate-600 hover:text-slate-900 font-medium">FAQ</Link>
-            </nav>
           </div>
         </div>
       </header>
