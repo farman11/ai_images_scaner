@@ -74,50 +74,60 @@ export default function Home() {
     <title>AI Detection Report</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        @page { 
+            size: A4; 
+            margin: 15mm; 
+        }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
+            line-height: 1.3; 
             color: #334155; 
             background: #ffffff;
+            font-size: 11px;
         }
         .header {
             background: linear-gradient(135deg, #5bc0be 0%, #4a9a98 100%);
             color: white;
-            padding: 40px;
+            padding: 15px;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 15px;
+            border-radius: 8px;
         }
-        .header h1 { font-size: 2.5em; margin-bottom: 10px; font-weight: 700; }
-        .header p { font-size: 1.1em; opacity: 0.9; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
-        .image-section { 
+        .header h1 { font-size: 1.8em; margin-bottom: 5px; font-weight: 700; }
+        .header p { font-size: 0.9em; opacity: 0.9; }
+        .container { max-width: 100%; margin: 0; padding: 0; }
+        .top-section { 
             display: flex; 
-            gap: 30px; 
-            margin-bottom: 40px; 
+            gap: 15px; 
+            margin-bottom: 15px; 
             align-items: flex-start;
+            height: 200px;
         }
         .image-container { 
             flex: 1; 
             text-align: center;
             background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            height: 100%;
         }
+        .image-container h3 { font-size: 1em; margin-bottom: 8px; color: #1e293b; }
         .analyzed-image { 
             max-width: 100%; 
-            height: auto; 
-            border-radius: 8px; 
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-height: 130px;
+            width: auto;
+            height: auto;
+            border-radius: 6px; 
+            margin-bottom: 8px;
         }
         .classification-badge {
             display: inline-block;
-            padding: 12px 24px;
-            border-radius: 25px;
+            padding: 6px 12px;
+            border-radius: 15px;
             font-weight: bold;
-            font-size: 1.1em;
-            margin: 10px 0;
+            font-size: 0.8em;
+            margin: 5px 0;
         }
         .real-image { 
             background: linear-gradient(135deg, #5bc0be, #4a9a98); 
@@ -130,22 +140,23 @@ export default function Home() {
         .results-panel { 
             flex: 1; 
             background: #f8fafc; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 12px; 
-            padding: 25px; 
+            border: 1px solid #e2e8f0; 
+            border-radius: 8px; 
+            padding: 15px; 
+            height: 100%;
         }
         .confidence-score {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
         }
         .confidence-number {
-            font-size: 3em;
+            font-size: 2.2em;
             font-weight: 900;
             background: linear-gradient(135deg, #5bc0be, #4a9a98);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
         .ai-generated .confidence-number {
             background: linear-gradient(135deg, #ef4444, #dc2626);
@@ -153,65 +164,76 @@ export default function Home() {
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .section { 
-            margin-bottom: 30px; 
-            background: white; 
-            border-radius: 12px; 
-            padding: 25px; 
-            border: 1px solid #e2e8f0;
-        }
-        .section h2 { 
-            color: #1e293b; 
-            margin-bottom: 15px; 
-            font-size: 1.4em; 
-            border-bottom: 2px solid #5bc0be; 
-            padding-bottom: 8px; 
-        }
         .technical-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; 
-            margin-bottom: 20px; 
+            gap: 8px; 
+            margin-bottom: 10px; 
         }
         .tech-item { 
             background: linear-gradient(135deg, #5bc0be20, #4a9a9820); 
             border: 1px solid #5bc0be30; 
-            border-radius: 8px; 
-            padding: 15px; 
+            border-radius: 6px; 
+            padding: 8px; 
             text-align: center; 
         }
         .tech-label { 
-            font-size: 0.9em; 
+            font-size: 0.7em; 
             color: #4a9a98; 
             font-weight: 600; 
         }
         .tech-value { 
-            font-size: 1.2em; 
+            font-size: 0.9em; 
             font-weight: bold; 
             color: #5bc0be; 
-            margin-top: 5px; 
+            margin-top: 3px; 
         }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .section { 
+            background: white; 
+            border-radius: 8px; 
+            padding: 12px; 
+            border: 1px solid #e2e8f0;
+        }
+        .section h2 { 
+            color: #1e293b; 
+            margin-bottom: 8px; 
+            font-size: 1em; 
+            border-bottom: 1px solid #5bc0be; 
+            padding-bottom: 4px; 
+        }
+        .section p { font-size: 0.9em; line-height: 1.3; }
         .indicators { 
             display: grid; 
-            gap: 10px; 
+            gap: 4px; 
         }
         .indicator { 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            padding: 12px; 
+            padding: 6px; 
             background: #f8fafc; 
-            border-radius: 8px; 
-            border-left: 4px solid #5bc0be; 
+            border-radius: 4px; 
+            border-left: 3px solid #5bc0be; 
+            font-size: 0.8em;
         }
         .methodology ul { 
             list-style: none; 
             padding-left: 0; 
+            columns: 2;
+            column-gap: 15px;
         }
         .methodology li { 
-            margin-bottom: 8px; 
-            padding-left: 20px; 
+            margin-bottom: 4px; 
+            padding-left: 12px; 
             position: relative; 
+            font-size: 0.8em;
+            break-inside: avoid;
         }
         .methodology li:before { 
             content: "✓"; 
@@ -220,31 +242,58 @@ export default function Home() {
             color: #5bc0be; 
             font-weight: bold; 
         }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .summary-item {
+            text-align: center;
+            padding: 8px;
+            background: #f8fafc;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .summary-label {
+            font-size: 0.7em;
+            color: #64748b;
+            margin-bottom: 3px;
+        }
+        .summary-value {
+            font-size: 0.9em;
+            font-weight: bold;
+            color: #1e293b;
+        }
         .footer { 
             background: linear-gradient(135deg, #1e293b, #334155); 
             color: white; 
-            padding: 30px; 
+            padding: 10px; 
             text-align: center; 
-            margin-top: 40px; 
+            margin-top: 15px; 
+            border-radius: 6px;
+            font-size: 0.8em;
         }
         .disclaimer { 
             background: #fef3c7; 
             border: 1px solid #f59e0b; 
-            border-radius: 8px; 
-            padding: 15px; 
-            margin: 20px 0; 
+            border-radius: 6px; 
+            padding: 8px; 
+            margin: 10px 0; 
+            font-size: 0.8em;
         }
         .warning { 
             background: #fee2e2; 
             border: 1px solid #ef4444; 
-            border-radius: 8px; 
-            padding: 15px; 
-            margin: 20px 0; 
+            border-radius: 6px; 
+            padding: 8px; 
+            margin: 10px 0; 
+            font-size: 0.8em;
         }
         @media print {
-            .header { break-inside: avoid; }
-            .section { break-inside: avoid; }
-            body { print-color-adjust: exact; }
+            body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            .header, .section, .indicator { break-inside: avoid; }
+            .content-grid { break-inside: avoid; }
         }
     </style>
 </head>
@@ -255,7 +304,8 @@ export default function Home() {
     </div>
     
     <div class="container">
-        <div class="image-section">
+        <!-- Top Section: Image and Results -->
+        <div class="top-section">
             <div class="image-container">
                 <h3>Analyzed Image</h3>
                 <img src="${previewUrl}" alt="Analyzed Image" class="analyzed-image">
@@ -267,16 +317,16 @@ export default function Home() {
             <div class="results-panel ${analysisResult.classification === 'Real Image' ? '' : 'ai-generated'}">
                 <div class="confidence-score">
                     <div class="confidence-number">${analysisResult.confidence}%</div>
-                    <div style="color: #64748b;">Confidence Score</div>
+                    <div style="color: #64748b; font-size: 0.8em;">Confidence Score</div>
                 </div>
                 
                 <div class="technical-grid">
                     <div class="tech-item">
-                        <div class="tech-label">Processing Time</div>
+                        <div class="tech-label">Time</div>
                         <div class="tech-value">${analysisResult.processingTime.toFixed(1)}s</div>
                     </div>
                     <div class="tech-item">
-                        <div class="tech-label">Image Size</div>
+                        <div class="tech-label">Size</div>
                         <div class="tech-value">${analysisResult.imageSize}</div>
                     </div>
                     <div class="tech-item">
@@ -284,62 +334,66 @@ export default function Home() {
                         <div class="tech-value">Multi-CV</div>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2>Analysis Summary</h2>
-            <p><strong>Report ID:</strong> ${analysisResult.id}</p>
-            <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
-            <p><strong>Classification:</strong> ${analysisResult.classification}</p>
-            <p><strong>Confidence Level:</strong> ${
-              analysisResult.confidence >= 90 ? 'Very High' :
-              analysisResult.confidence >= 80 ? 'High' :
-              analysisResult.confidence >= 70 ? 'Moderate' :
-              analysisResult.confidence >= 60 ? 'Moderate-Low' : 'Low'
-            } (${analysisResult.confidence}%)</p>
-        </div>
-        
-        <div class="section">
-            <h2>Key Detection Indicators</h2>
-            <div class="indicators">
-                ${analysisResult.indicators.map(indicator => `
-                    <div class="indicator">
-                        <span>${indicator.name}</span>
-                        <strong style="color: ${
-                          indicator.strength === 'Strong' ? '#5bc0be' :
-                          indicator.strength === 'Moderate' ? '#f59e0b' : '#ef4444'
-                        }">${indicator.strength}</strong>
+                
+                <!-- Quick Summary -->
+                <div style="margin-top: 10px; padding: 8px; background: white; border-radius: 6px;">
+                    <div style="font-size: 0.7em; color: #64748b; margin-bottom: 4px;">Report Details</div>
+                    <div style="font-size: 0.8em; line-height: 1.2;">
+                        <div><strong>ID:</strong> ${analysisResult.id.slice(0, 8)}</div>
+                        <div><strong>Generated:</strong> ${new Date().toLocaleDateString()}</div>
+                        <div><strong>Level:</strong> ${
+                          analysisResult.confidence >= 90 ? 'Very High' :
+                          analysisResult.confidence >= 80 ? 'High' :
+                          analysisResult.confidence >= 70 ? 'Moderate' : 'Low'
+                        }</div>
                     </div>
-                `).join('')}
+                </div>
             </div>
         </div>
         
-        <div class="section">
-            <h2>Classification Analysis</h2>
-            ${analysisResult.classification === 'Real Image' 
-              ? `<p>This image appears to be an <strong>authentic photograph</strong> based on our comprehensive analysis. The algorithms detected natural patterns consistent with real-world photography, including proper noise distribution, authentic compression signatures, and realistic texture patterns.</p>`
-              : `<div class="warning">
-                   <p><strong>⚠️ WARNING:</strong> This image shows characteristics consistent with <strong>AI-generated content</strong>. Our analysis detected patterns typical of artificial intelligence image generation, including unusual texture artifacts, atypical compression signatures, or synthetic noise patterns.</p>
-                 </div>`
-            }
+        <!-- Content Grid -->
+        <div class="content-grid">
+            <div class="section">
+                <h2>Key Detection Indicators</h2>
+                <div class="indicators">
+                    ${analysisResult.indicators.slice(0, 4).map(indicator => `
+                        <div class="indicator">
+                            <span>${indicator.name}</span>
+                            <strong style="color: ${
+                              indicator.strength === 'Strong' ? '#5bc0be' :
+                              indicator.strength === 'Moderate' ? '#f59e0b' : '#ef4444'
+                            }">${indicator.strength}</strong>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>Classification Analysis</h2>
+                ${analysisResult.classification === 'Real Image' 
+                  ? `<p>This image appears to be an <strong>authentic photograph</strong> based on comprehensive analysis. The algorithms detected natural patterns consistent with real-world photography.</p>`
+                  : `<div class="warning">
+                       <p><strong>⚠️ WARNING:</strong> This image shows characteristics consistent with <strong>AI-generated content</strong>. Detected patterns typical of artificial intelligence image generation.</p>
+                     </div>`
+                }
+            </div>
         </div>
         
         <div class="section methodology">
             <h2>Analysis Methodology</h2>
-            <p>Our AI detection system employs a hybrid approach combining traditional computer vision forensics with modern deep learning techniques:</p>
+            <p style="margin-bottom: 8px; font-size: 0.9em;">Hybrid approach combining computer vision forensics with deep learning:</p>
             <ul>
-                <li>Local Binary Patterns (LBP) - Texture analysis</li>
-                <li>Gray-Level Co-occurrence Matrix (GLCM) - Statistical texture features</li>
-                <li>Frequency Domain Analysis - DCT coefficient patterns</li>
-                <li>Compression Forensics - JPEG compression artifacts</li>
-                <li>Noise Pattern Detection - Statistical noise analysis</li>
-                <li>Deep Learning Neural Network - ResNet50 transfer learning</li>
+                <li>Local Binary Patterns (LBP)</li>
+                <li>Gray-Level Co-occurrence Matrix</li>
+                <li>Frequency Domain Analysis</li>
+                <li>Compression Forensics</li>
+                <li>Noise Pattern Detection</li>
+                <li>ResNet50 Neural Network</li>
             </ul>
         </div>
         
         <div class="disclaimer">
-            <p><strong>Professional Disclaimer:</strong> This analysis is provided for informational purposes. While our system achieves 96.8% accuracy across test datasets, no automated system is 100% accurate. For critical applications, human expert review is recommended.</p>
+            <p><strong>Disclaimer:</strong> Analysis provided for informational purposes. 96.8% accuracy across test datasets. For critical applications, human expert review recommended.</p>
         </div>
     </div>
     
