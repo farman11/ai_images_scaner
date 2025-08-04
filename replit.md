@@ -101,3 +101,11 @@ Design preference: Shadow-free, smooth design throughout the application (no sha
 - **Page-Specific SEO**: Dynamic meta tag updates per page with unique titles, descriptions, and structured data
 - **Performance SEO**: DNS prefetch, preconnect, and mobile optimization meta tags
 - **Search Features**: Website schema with search action for enhanced search engine integration
+
+## AI Generated Danger Color Implementation (January 2025)
+- **Warning Classification**: AI Generated results now display in red/danger colors to indicate potential risk
+- **Badge Styling**: AI Generated badge uses red gradient (from-red-500 to-red-600) with red border
+- **Visual Indicators**: Wave animations, image borders, and status badges use red colors for AI Generated content
+- **Progress Bars**: Confidence score progress bars display in red gradients for AI Generated classifications
+- **Alert Icons**: AlertTriangle icons replace CheckCircle for AI Generated results to emphasize warning nature
+- **Consistent Warning Theme**: All UI elements consistently use red/danger colors when AI content is detected

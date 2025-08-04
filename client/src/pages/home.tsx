@@ -591,15 +591,27 @@ export default function Home() {
                   {previewUrl && (
                     <div className="mb-6 flex justify-center">
                       <div className="relative">
-                        {/* Success Wave Animation */}
+                        {/* Wave Animation */}
                         <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="w-40 h-40 rounded-full border-2 border-[#5bc0be]/30 animate-ping"></div>
-                          <div className="absolute w-32 h-32 rounded-full border-2 border-[#4a9a98]/30 animate-ping animation-delay-75"></div>
+                          <div className={`w-40 h-40 rounded-full border-2 animate-ping ${
+                            analysisResult.classification === 'Real Image' 
+                              ? 'border-[#5bc0be]/30' 
+                              : 'border-red-500/30'
+                          }`}></div>
+                          <div className={`absolute w-32 h-32 rounded-full border-2 animate-ping animation-delay-75 ${
+                            analysisResult.classification === 'Real Image' 
+                              ? 'border-[#4a9a98]/30' 
+                              : 'border-red-600/30'
+                          }`}></div>
                         </div>
                         
                         {/* Analyzed Image */}
                         <div className="relative w-32 h-32">
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] p-1">
+                          <div className={`absolute inset-0 rounded-full p-1 ${
+                            analysisResult.classification === 'Real Image' 
+                              ? 'bg-gradient-to-r from-[#5bc0be] to-[#4a9a98]' 
+                              : 'bg-gradient-to-r from-red-500 to-red-600'
+                          }`}>
                             <div className="w-full h-full rounded-full bg-white p-1">
                               <img 
                                 src={previewUrl} 
@@ -609,9 +621,17 @@ export default function Home() {
                             </div>
                           </div>
                           
-                          {/* Success Badge */}
-                          <div className="absolute -bottom-2 -right-2 bg-[#5bc0be] text-white rounded-full p-1.5">
-                            <CheckCircle className="h-3 w-3" />
+                          {/* Status Badge */}
+                          <div className={`absolute -bottom-2 -right-2 text-white rounded-full p-1.5 ${
+                            analysisResult.classification === 'Real Image' 
+                              ? 'bg-[#5bc0be]' 
+                              : 'bg-red-500'
+                          }`}>
+                            {analysisResult.classification === 'Real Image' ? (
+                              <CheckCircle className="h-3 w-3" />
+                            ) : (
+                              <AlertTriangle className="h-3 w-3" />
+                            )}
                           </div>
                         </div>
                       </div>
@@ -627,7 +647,7 @@ export default function Home() {
                         className={`px-4 py-2 text-sm font-bold rounded-xl ${
                           analysisResult.classification === 'Real Image' 
                             ? 'bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white' 
-                            : 'bg-gradient-to-r from-[#5bc0be]/70 to-[#4a9a98]/70 text-white'
+                            : 'bg-gradient-to-r from-red-500 to-red-600 text-white border border-red-700'
                         }`}
                       >
                         {analysisResult.classification}
@@ -642,7 +662,11 @@ export default function Home() {
                           <p className="text-slate-500 text-sm">AI Detection Accuracy</p>
                         </div>
                         <div className="text-right">
-                          <span className="text-4xl font-black bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] bg-clip-text text-transparent">
+                          <span className={`text-4xl font-black bg-clip-text text-transparent ${
+                            analysisResult.classification === 'Real Image' 
+                              ? 'bg-gradient-to-r from-[#5bc0be] to-[#4a9a98]' 
+                              : 'bg-gradient-to-r from-red-500 to-red-600'
+                          }`}>
                             {analysisResult.confidence}%
                           </span>
                           <p className="text-slate-500 text-sm">Confidence</p>
@@ -654,11 +678,17 @@ export default function Home() {
                         <div className="w-full bg-slate-200 rounded-full h-4 overflow-hidden">
                           <div 
                             className={`h-4 rounded-full transition-all duration-2000 ease-out ${
-                              analysisResult.confidence >= 80 
-                                ? 'bg-gradient-to-r from-[#5bc0be] via-[#4a9a98] to-[#5bc0be]' 
-                                : analysisResult.confidence >= 60
-                                ? 'bg-gradient-to-r from-[#5bc0be]/80 via-[#4a9a98]/80 to-[#5bc0be]/80'
-                                : 'bg-gradient-to-r from-[#5bc0be]/60 via-[#4a9a98]/60 to-[#5bc0be]/60'
+                              analysisResult.classification === 'Real Image' 
+                                ? (analysisResult.confidence >= 80 
+                                    ? 'bg-gradient-to-r from-[#5bc0be] via-[#4a9a98] to-[#5bc0be]' 
+                                    : analysisResult.confidence >= 60
+                                    ? 'bg-gradient-to-r from-[#5bc0be]/80 via-[#4a9a98]/80 to-[#5bc0be]/80'
+                                    : 'bg-gradient-to-r from-[#5bc0be]/60 via-[#4a9a98]/60 to-[#5bc0be]/60')
+                                : (analysisResult.confidence >= 80 
+                                    ? 'bg-gradient-to-r from-red-500 via-red-600 to-red-500' 
+                                    : analysisResult.confidence >= 60
+                                    ? 'bg-gradient-to-r from-red-500/80 via-red-600/80 to-red-500/80'
+                                    : 'bg-gradient-to-r from-red-500/60 via-red-600/60 to-red-500/60')
                             }`}
                             style={{ width: `${analysisResult.confidence}%` }}
                           />
