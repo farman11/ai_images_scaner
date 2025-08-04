@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import { Link } from "wouter";
 import { 
   Eye, 
   Upload, 
@@ -212,9 +213,9 @@ export default function Home() {
               </div>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
-              <a href="#" className="text-slate-600 hover:text-slate-900 font-medium">How it works</a>
-              <a href="#" className="text-slate-600 hover:text-slate-900 font-medium">About</a>
-              <a href="#" className="text-slate-600 hover:text-slate-900 font-medium">FAQ</a>
+              <Link href="/how-it-works" className="text-slate-600 hover:text-slate-900 font-medium">How it works</Link>
+              <Link href="/about" className="text-slate-600 hover:text-slate-900 font-medium">About</Link>
+              <Link href="/faq" className="text-slate-600 hover:text-slate-900 font-medium">FAQ</Link>
             </nav>
           </div>
         </div>
@@ -593,26 +594,24 @@ export default function Home() {
                 </div>
                 <span className="text-xl font-bold">AI Detection Checker</span>
               </div>
-              <p className="text-slate-400 mb-4">Advanced AI-powered image authenticity verification for the modern digital world.</p>
+              <p className="text-slate-400 mb-4">Developed by RootGroup.tech - Advanced AI-powered image authenticity verification for the modern digital world.</p>
               <div className="flex space-x-4">
-                <a href="#" className="text-slate-400 hover:text-white">Twitter</a>
-                <a href="#" className="text-slate-400 hover:text-white">GitHub</a>
-                <a href="#" className="text-slate-400 hover:text-white">LinkedIn</a>
+                <a href="https://rootgroup.tech/" className="text-slate-400 hover:text-white">Visit RootGroup.tech</a>
               </div>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Product</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="#" className="hover:text-white">Features</a></li>
-                <li><a href="#" className="hover:text-white">API</a></li>
-                <li><a href="#" className="hover:text-white">Pricing</a></li>
-                <li><a href="#" className="hover:text-white">FAQ</a></li>
+                <li><Link href="/" className="hover:text-white">Home</Link></li>
+                <li><Link href="/how-it-works" className="hover:text-white">How it works</Link></li>
+                <li><Link href="/about" className="hover:text-white">About</Link></li>
+                <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Company</h4>
               <ul className="space-y-2 text-slate-400">
-                <li><a href="#" className="hover:text-white">About</a></li>
+                <li><a href="https://rootgroup.tech/" className="hover:text-white">RootGroup.tech</a></li>
                 <li><a href="#" className="hover:text-white">Privacy</a></li>
                 <li><a href="#" className="hover:text-white">Terms</a></li>
                 <li><a href="#" className="hover:text-white">Contact</a></li>
@@ -620,7 +619,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-slate-800 mt-8 pt-8 text-center text-slate-400">
-            <p>&copy; 2024 AI Detection Checker. All rights reserved.</p>
+            <p>&copy; 2024 AI Detection Checker by RootGroup.tech. All rights reserved.</p>
           </div>
         </div>
       </footer>
