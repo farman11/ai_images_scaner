@@ -824,9 +824,9 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white mt-16">
+      <footer className="bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] text-white mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="text-center text-slate-400">
+          <div className="text-center text-white/90">
             <p>&copy; 2024 AI Detection Checker by RootGroup.tech. All rights reserved.</p>
           </div>
         </div>
