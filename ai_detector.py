@@ -36,10 +36,12 @@ class AIImageDetector:
             img = Image.open(io.BytesIO(image_buffer))
             exif_data = {}
             
-            if hasattr(img, '_getexif') and img._getexif() is not None:
-                for tag_id, value in img._getexif().items():
-                    tag = TAGS.get(tag_id, tag_id)
-                    exif_data[tag] = value
+            if hasattr(img, 'getexif'):
+                exif_dict = img.getexif()
+                if exif_dict:
+                    for tag_id, value in exif_dict.items():
+                        tag = TAGS.get(tag_id, tag_id)
+                        exif_data[tag] = value
             
             return exif_data
         except Exception:

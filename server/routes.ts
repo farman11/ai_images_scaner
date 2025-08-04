@@ -37,8 +37,8 @@ async function classifyImage(imageBuffer: Buffer, metadata: any): Promise<{
       const tempFilePath = join(process.cwd(), `temp_${Date.now()}.jpg`);
       writeFileSync(tempFilePath, imageBuffer);
 
-      // Spawn Python AI detector process
-      const pythonProcess = spawn('python3', ['ai_detector.py', tempFilePath], {
+      // Spawn enhanced Python AI detector process (fallback to original if enhanced fails)
+      const pythonProcess = spawn('python3', ['enhanced_ai_detector.py', tempFilePath], {
         cwd: process.cwd(),
       });
 
