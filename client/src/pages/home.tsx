@@ -799,7 +799,7 @@ export default function Home() {
         </div>
 
         {/* How It Works */}
-        <Card className="mt-16 shadow-2xl border-0 bg-white/70 backdrop-blur-sm hover-glow">
+        <Card className="mt-16 border-0 backdrop-blur-sm hover-glow">
           <CardContent className="p-8">
             <h3 className="text-2xl font-semibold text-slate-900 text-center mb-8 bg-gradient-to-r from-[#5bc0be] to-[#4a9a98] bg-clip-text text-transparent">
               How It Works
