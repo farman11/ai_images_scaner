@@ -61,82 +61,331 @@ export default function Home() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
-  // PDF Export Function
+  // Professional PDF Report Generator
   const generatePDFReport = () => {
-    if (!analysisResult) return;
+    if (!analysisResult || !previewUrl) return;
 
-    const reportContent = `
-# AI Image Detection Report
+    // Create HTML content for the report
+    const reportHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AI Detection Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #334155; 
+            background: #ffffff;
+        }
+        .header {
+            background: linear-gradient(135deg, #5bc0be 0%, #4a9a98 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; font-weight: 700; }
+        .header p { font-size: 1.1em; opacity: 0.9; }
+        .container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .image-section { 
+            display: flex; 
+            gap: 30px; 
+            margin-bottom: 40px; 
+            align-items: flex-start;
+        }
+        .image-container { 
+            flex: 1; 
+            text-align: center;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .analyzed-image { 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 8px; 
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .classification-badge {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+        .real-image { 
+            background: linear-gradient(135deg, #5bc0be, #4a9a98); 
+            color: white; 
+        }
+        .ai-generated { 
+            background: linear-gradient(135deg, #ef4444, #dc2626); 
+            color: white; 
+        }
+        .results-panel { 
+            flex: 1; 
+            background: #f8fafc; 
+            border: 2px solid #e2e8f0; 
+            border-radius: 12px; 
+            padding: 25px; 
+        }
+        .confidence-score {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .confidence-number {
+            font-size: 3em;
+            font-weight: 900;
+            background: linear-gradient(135deg, #5bc0be, #4a9a98);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+        }
+        .ai-generated .confidence-number {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section { 
+            margin-bottom: 30px; 
+            background: white; 
+            border-radius: 12px; 
+            padding: 25px; 
+            border: 1px solid #e2e8f0;
+        }
+        .section h2 { 
+            color: #1e293b; 
+            margin-bottom: 15px; 
+            font-size: 1.4em; 
+            border-bottom: 2px solid #5bc0be; 
+            padding-bottom: 8px; 
+        }
+        .technical-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+            margin-bottom: 20px; 
+        }
+        .tech-item { 
+            background: linear-gradient(135deg, #5bc0be20, #4a9a9820); 
+            border: 1px solid #5bc0be30; 
+            border-radius: 8px; 
+            padding: 15px; 
+            text-align: center; 
+        }
+        .tech-label { 
+            font-size: 0.9em; 
+            color: #4a9a98; 
+            font-weight: 600; 
+        }
+        .tech-value { 
+            font-size: 1.2em; 
+            font-weight: bold; 
+            color: #5bc0be; 
+            margin-top: 5px; 
+        }
+        .indicators { 
+            display: grid; 
+            gap: 10px; 
+        }
+        .indicator { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px; 
+            background: #f8fafc; 
+            border-radius: 8px; 
+            border-left: 4px solid #5bc0be; 
+        }
+        .methodology ul { 
+            list-style: none; 
+            padding-left: 0; 
+        }
+        .methodology li { 
+            margin-bottom: 8px; 
+            padding-left: 20px; 
+            position: relative; 
+        }
+        .methodology li:before { 
+            content: "✓"; 
+            position: absolute; 
+            left: 0; 
+            color: #5bc0be; 
+            font-weight: bold; 
+        }
+        .footer { 
+            background: linear-gradient(135deg, #1e293b, #334155); 
+            color: white; 
+            padding: 30px; 
+            text-align: center; 
+            margin-top: 40px; 
+        }
+        .disclaimer { 
+            background: #fef3c7; 
+            border: 1px solid #f59e0b; 
+            border-radius: 8px; 
+            padding: 15px; 
+            margin: 20px 0; 
+        }
+        .warning { 
+            background: #fee2e2; 
+            border: 1px solid #ef4444; 
+            border-radius: 8px; 
+            padding: 15px; 
+            margin: 20px 0; 
+        }
+        @media print {
+            .header { break-inside: avoid; }
+            .section { break-inside: avoid; }
+            body { print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>AI Image Detection Report</h1>
+        <p>Professional Computer Vision Analysis • RootGroup.tech</p>
+    </div>
+    
+    <div class="container">
+        <div class="image-section">
+            <div class="image-container">
+                <h3>Analyzed Image</h3>
+                <img src="${previewUrl}" alt="Analyzed Image" class="analyzed-image">
+                <div class="classification-badge ${analysisResult.classification === 'Real Image' ? 'real-image' : 'ai-generated'}">
+                    ${analysisResult.classification}
+                </div>
+            </div>
+            
+            <div class="results-panel ${analysisResult.classification === 'Real Image' ? '' : 'ai-generated'}">
+                <div class="confidence-score">
+                    <div class="confidence-number">${analysisResult.confidence}%</div>
+                    <div style="color: #64748b;">Confidence Score</div>
+                </div>
+                
+                <div class="technical-grid">
+                    <div class="tech-item">
+                        <div class="tech-label">Processing Time</div>
+                        <div class="tech-value">${analysisResult.processingTime.toFixed(1)}s</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-label">Image Size</div>
+                        <div class="tech-value">${analysisResult.imageSize}</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-label">Method</div>
+                        <div class="tech-value">Multi-CV</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Analysis Summary</h2>
+            <p><strong>Report ID:</strong> ${analysisResult.id}</p>
+            <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
+            <p><strong>Classification:</strong> ${analysisResult.classification}</p>
+            <p><strong>Confidence Level:</strong> ${
+              analysisResult.confidence >= 90 ? 'Very High' :
+              analysisResult.confidence >= 80 ? 'High' :
+              analysisResult.confidence >= 70 ? 'Moderate' :
+              analysisResult.confidence >= 60 ? 'Moderate-Low' : 'Low'
+            } (${analysisResult.confidence}%)</p>
+        </div>
+        
+        <div class="section">
+            <h2>Key Detection Indicators</h2>
+            <div class="indicators">
+                ${analysisResult.indicators.map(indicator => `
+                    <div class="indicator">
+                        <span>${indicator.name}</span>
+                        <strong style="color: ${
+                          indicator.strength === 'Strong' ? '#5bc0be' :
+                          indicator.strength === 'Moderate' ? '#f59e0b' : '#ef4444'
+                        }">${indicator.strength}</strong>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>Classification Analysis</h2>
+            ${analysisResult.classification === 'Real Image' 
+              ? `<p>This image appears to be an <strong>authentic photograph</strong> based on our comprehensive analysis. The algorithms detected natural patterns consistent with real-world photography, including proper noise distribution, authentic compression signatures, and realistic texture patterns.</p>`
+              : `<div class="warning">
+                   <p><strong>⚠️ WARNING:</strong> This image shows characteristics consistent with <strong>AI-generated content</strong>. Our analysis detected patterns typical of artificial intelligence image generation, including unusual texture artifacts, atypical compression signatures, or synthetic noise patterns.</p>
+                 </div>`
+            }
+        </div>
+        
+        <div class="section methodology">
+            <h2>Analysis Methodology</h2>
+            <p>Our AI detection system employs a hybrid approach combining traditional computer vision forensics with modern deep learning techniques:</p>
+            <ul>
+                <li>Local Binary Patterns (LBP) - Texture analysis</li>
+                <li>Gray-Level Co-occurrence Matrix (GLCM) - Statistical texture features</li>
+                <li>Frequency Domain Analysis - DCT coefficient patterns</li>
+                <li>Compression Forensics - JPEG compression artifacts</li>
+                <li>Noise Pattern Detection - Statistical noise analysis</li>
+                <li>Deep Learning Neural Network - ResNet50 transfer learning</li>
+            </ul>
+        </div>
+        
+        <div class="disclaimer">
+            <p><strong>Professional Disclaimer:</strong> This analysis is provided for informational purposes. While our system achieves 96.8% accuracy across test datasets, no automated system is 100% accurate. For critical applications, human expert review is recommended.</p>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p><strong>AI Detection Checker</strong> • RootGroup.tech</p>
+        <p>Advanced AI and Computer Vision Solutions</p>
+        <p>https://aidetectionchecker.replit.app/</p>
+    </div>
+</body>
+</html>`;
 
-## Analysis Summary
-- **Classification:** ${analysisResult.classification}
-- **Confidence Score:** ${analysisResult.confidence}%
-- **Image Size:** ${analysisResult.imageSize}
-- **Processing Time:** ${analysisResult.processingTime.toFixed(1)}s
-- **Analysis Method:** Multi-Algorithm Computer Vision
-- **Report ID:** ${analysisResult.id}
-- **Generated:** ${new Date().toLocaleString()}
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(reportHTML);
+      printWindow.document.close();
+      
+      // Wait for content to load, then trigger print
+      printWindow.onload = () => {
+        setTimeout(() => {
+          printWindow.print();
+          printWindow.close();
+        }, 500);
+      };
 
-## Technical Details
-This analysis was performed using 6 advanced computer vision algorithms:
-1. Local Binary Patterns (LBP) - Texture analysis
-2. Gray-Level Co-occurrence Matrix (GLCM) - Statistical texture features  
-3. Frequency Domain Analysis - DCT coefficient patterns
-4. Compression Forensics - JPEG compression artifacts
-5. Noise Pattern Detection - Statistical noise analysis
-6. Deep Learning Neural Network - ResNet50 transfer learning
+      toast({
+        title: "Report Generated",
+        description: "Professional PDF report is ready for download",
+      });
+    } else {
+      // Fallback: download as HTML file
+      const blob = new Blob([reportHTML], { type: 'text/html' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `AI_Detection_Report_${analysisResult.id.slice(0, 8)}_${new Date().toISOString().slice(0, 10)}.html`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
 
-## Key Indicators
-${analysisResult.indicators.map(indicator => 
-  `- ${indicator.name}: ${indicator.strength}`
-).join('\n')}
-
-## Classification Details
-${analysisResult.classification === 'Real Image' 
-  ? `This image appears to be an authentic photograph based on our comprehensive analysis. The algorithms detected natural patterns consistent with real-world photography, including proper noise distribution, authentic compression signatures, and realistic texture patterns.`
-  : `WARNING: This image shows characteristics consistent with AI-generated content. Our analysis detected patterns typical of artificial intelligence image generation, including unusual texture artifacts, atypical compression signatures, or synthetic noise patterns.`
-}
-
-## Confidence Analysis
-The ${analysisResult.confidence}% confidence score indicates ${
-  analysisResult.confidence >= 90 ? 'very high' :
-  analysisResult.confidence >= 80 ? 'high' :
-  analysisResult.confidence >= 70 ? 'moderate' :
-  analysisResult.confidence >= 60 ? 'moderate-low' : 'low'
-} certainty in the classification result.
-
-## Methodology
-Our AI detection system employs a hybrid approach combining traditional computer vision forensics with modern deep learning techniques. The system analyzes:
-- Texture patterns and statistical distributions
-- Frequency domain characteristics
-- Compression artifacts and metadata
-- Neural network-based feature extraction
-- Cross-validation across multiple algorithms
-
-## Disclaimer
-This analysis is provided for informational purposes. While our system achieves 96.8% accuracy across test datasets, no automated system is 100% accurate. For critical applications, human expert review is recommended.
-
----
-Report generated by AI Detection Checker
-RootGroup.tech - Advanced AI and Computer Vision Solutions
-https://aidetectionchecker.replit.app/
-    `.trim();
-
-    // Create and download the report
-    const blob = new Blob([reportContent], { type: 'text/plain' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `AI_Detection_Report_${analysisResult.id.slice(0, 8)}_${new Date().toISOString().slice(0, 10)}.txt`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
-
-    toast({
-      title: "Report Downloaded",
-      description: "AI detection report has been saved to your device",
-    });
+      toast({
+        title: "Report Downloaded",
+        description: "HTML report saved. Open in browser and print to PDF",
+      });
+    }
   };
 
   const analyzeImageMutation = useMutation({
