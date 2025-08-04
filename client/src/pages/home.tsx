@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -43,8 +43,15 @@ interface AnalysisResult {
 
 import GoogleAd from "@/components/GoogleAd";
 import AdModal from "@/components/AdModal";
+import { updatePageSEO, seoConfigs, addOrganizationStructuredData, addWebsiteStructuredData } from "@/lib/seo";
 
 export default function Home() {
+  // Update SEO when component mounts
+  useEffect(() => {
+    updatePageSEO(seoConfigs.home);
+    addOrganizationStructuredData();
+    addWebsiteStructuredData();
+  }, []);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);

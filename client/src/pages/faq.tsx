@@ -15,7 +15,8 @@ import {
   CheckCircle
 } from "lucide-react";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { updatePageSEO, seoConfigs, addBreadcrumbStructuredData } from "@/lib/seo";
 
 interface FAQItem {
   question: string;
@@ -91,6 +92,15 @@ const categories = ["All", "General", "Technical", "Privacy", "Usage"];
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Update SEO when component mounts
+  useEffect(() => {
+    updatePageSEO(seoConfigs.faq);
+    addBreadcrumbStructuredData([
+      { name: "Home", url: "https://aidetectionchecker.replit.app/" },
+      { name: "FAQ", url: "https://aidetectionchecker.replit.app/faq" }
+    ]);
+  }, []);
 
   const toggleItem = (index: number) => {
     setOpenItems(prev => 

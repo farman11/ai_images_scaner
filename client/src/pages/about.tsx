@@ -16,8 +16,18 @@ import {
   CheckCircle
 } from "lucide-react";
 import { Link } from "wouter";
+import { updatePageSEO, seoConfigs, addBreadcrumbStructuredData } from "@/lib/seo";
+import { useEffect } from "react";
 
 export default function About() {
+  // Update SEO when component mounts
+  useEffect(() => {
+    updatePageSEO(seoConfigs.about);
+    addBreadcrumbStructuredData([
+      { name: "Home", url: "https://aidetectionchecker.replit.app/" },
+      { name: "About", url: "https://aidetectionchecker.replit.app/about" }
+    ]);
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}

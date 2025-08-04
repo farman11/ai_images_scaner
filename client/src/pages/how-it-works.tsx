@@ -19,8 +19,18 @@ import {
   FileImage
 } from "lucide-react";
 import { Link } from "wouter";
+import { updatePageSEO, seoConfigs, addBreadcrumbStructuredData } from "@/lib/seo";
+import { useEffect } from "react";
 
 export default function HowItWorks() {
+  // Update SEO when component mounts
+  useEffect(() => {
+    updatePageSEO(seoConfigs.howItWorks);
+    addBreadcrumbStructuredData([
+      { name: "Home", url: "https://aidetectionchecker.replit.app/" },
+      { name: "How it Works", url: "https://aidetectionchecker.replit.app/how-it-works" }
+    ]);
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
