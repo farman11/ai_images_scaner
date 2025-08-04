@@ -35,10 +35,18 @@ Preferred communication style: Simple, everyday language.
 - **Security**: Password hashing and secure session management
 
 ## AI Detection System
-- **Image Analysis**: Mock AI classification system that simulates real-world AI detection
+- **Enhanced Neural Networks**: Transfer learning with ResNet50 for deep learning-based AI detection
+- **Hybrid Analysis**: Combines CNN deep learning with traditional computer vision forensics
+- **Multi-Algorithm Detection**: 6 advanced algorithms including texture analysis, frequency domain, compression forensics
 - **Processing Pipeline**: Multi-stage analysis including metadata extraction, noise pattern detection, and artifact identification
 - **Result Structure**: Confidence scoring, classification labels, and detailed indicator reporting
 - **Performance Tracking**: Processing time measurement and optimization
+
+## Monetization System
+- **Pre-Analysis Ad Modal**: Interactive modal displaying premium features and upgrade options before analysis
+- **Timed Ad Experience**: 8-second countdown with premium service promotion
+- **Premium Upselling**: Showcases batch processing, API access, and priority support features
+- **Strategic Ad Placement**: Ads shown at optimal engagement moments (before analysis starts)
 
 ## Development Workflow
 - **Build System**: Vite for frontend bundling with hot module replacement

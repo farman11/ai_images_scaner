@@ -38,19 +38,20 @@ interface AnalysisResult {
 }
 
 import GoogleAd from "@/components/GoogleAd";
+import AdModal from "@/components/AdModal";
 
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
   const [showAd, setShowAd] = useState(false);
+  const [showAdModal, setShowAdModal] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
   const analyzeImageMutation = useMutation({
     mutationFn: async (file: File) => {
-      setIsAnalyzing(true);
       const formData = new FormData();
       formData.append('image', file);
       
@@ -137,14 +138,22 @@ export default function Home() {
     }
     setAnalysisResult(null);
     setShowAd(false);
+    setShowAdModal(false);
     setIsAnalyzing(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
-  const analyzeImage = () => {
+  const startAnalysis = () => {
     if (!selectedFile) return;
+    // Show ad modal first before starting analysis
+    setShowAdModal(true);
+  };
+
+  const proceedWithAnalysis = () => {
+    if (!selectedFile) return;
+    setIsAnalyzing(true);
     analyzeImageMutation.mutate(selectedFile);
   };
 
@@ -301,7 +310,7 @@ export default function Home() {
               )}
 
               <Button
-                onClick={analyzeImage}
+                onClick={startAnalysis}
                 disabled={!selectedFile || analyzeImageMutation.isPending}
                 className={`
                   w-full mt-6 py-4 text-lg font-semibold 
@@ -571,6 +580,14 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* Ad Modal */}
+      <AdModal
+        isOpen={showAdModal}
+        onClose={() => setShowAdModal(false)}
+        onContinue={proceedWithAnalysis}
+        analysisInProgress={isAnalyzing}
+      />
     </div>
   );
 }
