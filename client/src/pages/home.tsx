@@ -18,7 +18,9 @@ import {
   AlertTriangle,
   XCircle,
   Image as ImageIcon,
-  Microscope
+  Microscope,
+  Play,
+  Pause
 } from "lucide-react";
 
 interface AnalysisResult {
@@ -35,15 +37,20 @@ interface AnalysisResult {
   originalSize: number;
 }
 
+import GoogleAd from "@/components/GoogleAd";
+
 export default function Home() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [showAd, setShowAd] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
 
   const analyzeImageMutation = useMutation({
     mutationFn: async (file: File) => {
+      setIsAnalyzing(true);
       const formData = new FormData();
       formData.append('image', file);
       
@@ -61,12 +68,18 @@ export default function Home() {
     },
     onSuccess: (data: AnalysisResult) => {
       setAnalysisResult(data);
+      setIsAnalyzing(false);
+      // Show Google Ad after analysis completes
+      setTimeout(() => {
+        setShowAd(true);
+      }, 1500);
       toast({
         title: "Analysis Complete",
         description: `Image classified as ${data.classification} with ${data.confidence}% confidence`,
       });
     },
     onError: (error: Error) => {
+      setIsAnalyzing(false);
       toast({
         title: "Analysis Failed",
         description: error.message,
@@ -123,6 +136,8 @@ export default function Home() {
       setPreviewUrl(null);
     }
     setAnalysisResult(null);
+    setShowAd(false);
+    setIsAnalyzing(false);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -166,17 +181,24 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-indigo-400/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-400/10 to-blue-400/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+
       {/* Header */}
-      <header className="bg-white shadow-sm border-b border-slate-200">
+      <header className="bg-white/80 backdrop-blur-xl shadow-lg border-b border-white/20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <div className="flex items-center space-x-3 group">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
                 <Eye className="text-white h-5 w-5" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-slate-900">AI Detection Checker</h1>
+                <h1 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">AI Detection Checker</h1>
                 <p className="text-sm text-slate-500">Verify image authenticity</p>
               </div>
             </div>
@@ -189,32 +211,51 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-10">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-slate-900 mb-4">
+        <div className="text-center mb-12 animate-fade-in-up">
+          <h2 className="text-4xl font-bold text-slate-900 mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent animate-pulse">
             Detect AI-Generated Images
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Upload any image and our advanced multi-algorithm system will use texture analysis, frequency domain detection, compression forensics, statistical pattern recognition, and EXIF metadata examination to determine authenticity with professional accuracy.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Upload Section */}
-          <Card className="shadow-lg">
+          <Card className="shadow-2xl border-0 bg-white/70 backdrop-blur-sm transform transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold text-slate-900 mb-6">Upload Image</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-6 flex items-center">
+                <Upload className="mr-3 h-6 w-6 text-blue-600" />
+                Upload Image
+              </h3>
               
               <div
-                className="border-2 border-dashed border-slate-300 rounded-xl p-8 text-center transition-colors hover:border-primary hover:bg-blue-50 cursor-pointer"
+                className={`
+                  border-2 border-dashed rounded-xl p-8 text-center cursor-pointer
+                  transition-all duration-300 transform
+                  ${selectedFile 
+                    ? 'border-green-400 bg-green-50 scale-105' 
+                    : 'border-slate-300 hover:border-blue-400 hover:bg-blue-50 hover:scale-105'
+                  }
+                `}
                 onDrop={handleDrop}
                 onDragOver={handleDragOver}
                 onClick={() => fileInputRef.current?.click()}
               >
-                <CloudUpload className="mx-auto h-12 w-12 text-slate-400 mb-4" />
-                <h4 className="text-lg font-medium text-slate-700 mb-2">Drop your image here</h4>
-                <p className="text-slate-500 mb-4">or click to browse</p>
+                <div className="transform transition-all duration-300 hover:scale-110">
+                  <CloudUpload className={`
+                    mx-auto h-12 w-12 mb-4 transition-colors duration-300
+                    ${selectedFile ? 'text-green-500' : 'text-slate-400 hover:text-blue-500'}
+                  `} />
+                </div>
+                <h4 className="text-lg font-medium text-slate-700 mb-2">
+                  {selectedFile ? 'File Selected!' : 'Drop your image here'}
+                </h4>
+                <p className="text-slate-500 mb-4">
+                  {selectedFile ? 'Click to change file' : 'or click to browse'}
+                </p>
                 <input
                   type="file"
                   ref={fileInputRef}
@@ -226,7 +267,10 @@ export default function Home() {
                     }
                   }}
                 />
-                <Button type="button">
+                <Button 
+                  type="button" 
+                  className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 transform transition-all duration-300 hover:scale-105 shadow-lg"
+                >
                   Choose File
                 </Button>
                 <p className="text-xs text-slate-400 mt-3">Supports JPG, JPEG, PNG, WebP • Max 10MB</p>
@@ -259,25 +303,38 @@ export default function Home() {
               <Button
                 onClick={analyzeImage}
                 disabled={!selectedFile || analyzeImageMutation.isPending}
-                className="w-full mt-6 py-4 text-lg font-semibold"
+                className={`
+                  w-full mt-6 py-4 text-lg font-semibold 
+                  bg-gradient-to-r from-blue-600 to-indigo-600 
+                  hover:from-blue-700 hover:to-indigo-700
+                  transform transition-all duration-300 hover:scale-105 hover:shadow-xl
+                  disabled:hover:scale-100 disabled:hover:shadow-md
+                  ${isAnalyzing ? 'animate-pulse' : ''}
+                `}
                 size="lg"
               >
                 {analyzeImageMutation.isPending ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
-                    Analyzing...
+                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3" />
+                    <span className="animate-pulse">Analyzing Image...</span>
                   </>
                 ) : (
-                  'Analyze Image'
+                  <>
+                    <Microscope className="mr-3 h-5 w-5" />
+                    Analyze Image
+                  </>
                 )}
               </Button>
             </CardContent>
           </Card>
 
           {/* Results Section */}
-          <Card className="shadow-lg">
+          <Card className="shadow-2xl border-0 bg-white/70 backdrop-blur-sm transform transition-all duration-500 hover:scale-[1.02] hover:shadow-3xl">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-semibold text-slate-900 mb-6">Analysis Results</h3>
+              <h3 className="text-2xl font-semibold text-slate-900 mb-6 flex items-center">
+                <Microscope className="mr-3 h-6 w-6 text-indigo-600" />
+                Analysis Results
+              </h3>
               
               {!analysisResult ? (
                 <div className="text-center py-12">
@@ -381,7 +438,7 @@ export default function Home() {
                   <div className="flex space-x-3">
                     <Button 
                       variant="outline" 
-                      className="flex-1"
+                      className="flex-1 transform transition-all duration-300 hover:scale-105 hover:shadow-md"
                       onClick={() => {
                         toast({
                           title: "Download Report",
@@ -393,7 +450,7 @@ export default function Home() {
                       Download Report
                     </Button>
                     <Button 
-                      className="flex-1"
+                      className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 transform transition-all duration-300 hover:scale-105 hover:shadow-md"
                       onClick={() => {
                         removeFile();
                         setAnalysisResult(null);
@@ -408,55 +465,64 @@ export default function Home() {
           </Card>
         </div>
 
+        {/* Google Ads - Shows after analysis */}
+        {showAd && analysisResult && (
+          <div className="mt-8 animate-fade-in-up">
+            <GoogleAd type="card" animated={true} />
+          </div>
+        )}
+
         {/* Features Section */}
         <div className="mt-16 grid md:grid-cols-3 gap-8">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Zap className="text-primary h-8 w-8" />
+          <div className="text-center group transform transition-all duration-500 hover:scale-105 animate-fade-in-up">
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gradient-to-br group-hover:from-blue-500/20 group-hover:to-indigo-500/20 transition-all duration-300 hover-glow">
+              <Zap className="text-blue-600 h-8 w-8 group-hover:scale-110 transition-transform" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">Fast Analysis</h3>
-            <p className="text-slate-600">Get results in seconds with our optimized AI model designed for speed and accuracy.</p>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Fast Analysis</h3>
+            <p className="text-slate-600">Get results in seconds with our optimized multi-algorithm system designed for speed and accuracy.</p>
           </div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-green-600/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <Shield className="text-green-600 h-8 w-8" />
+          <div className="text-center group transform transition-all duration-500 hover:scale-105 animate-fade-in-up delay-200">
+            <div className="w-16 h-16 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gradient-to-br group-hover:from-green-500/20 group-hover:to-emerald-500/20 transition-all duration-300 hover-glow">
+              <Shield className="text-green-600 h-8 w-8 group-hover:scale-110 transition-transform" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">Secure & Private</h3>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-green-600 transition-colors">Secure & Private</h3>
             <p className="text-slate-600">Your images are processed securely and are not stored on our servers after analysis.</p>
           </div>
-          <div className="text-center">
-            <div className="w-16 h-16 bg-yellow-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="text-yellow-500 h-8 w-8" />
+          <div className="text-center group transform transition-all duration-500 hover:scale-105 animate-fade-in-up delay-400">
+            <div className="w-16 h-16 bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-gradient-to-br group-hover:from-yellow-500/20 group-hover:to-orange-500/20 transition-all duration-300 hover-glow">
+              <TrendingUp className="text-yellow-500 h-8 w-8 group-hover:scale-110 transition-transform" />
             </div>
-            <h3 className="text-xl font-semibold text-slate-900 mb-2">High Accuracy</h3>
-            <p className="text-slate-600">Trained on millions of images with 95%+ accuracy rate in detecting AI-generated content.</p>
+            <h3 className="text-xl font-semibold text-slate-900 mb-2 group-hover:text-yellow-600 transition-colors">High Accuracy</h3>
+            <p className="text-slate-600">Professional-grade accuracy with 6 advanced computer vision algorithms working together.</p>
           </div>
         </div>
 
         {/* How It Works */}
-        <Card className="mt-16 shadow-lg">
+        <Card className="mt-16 shadow-2xl border-0 bg-white/70 backdrop-blur-sm hover-glow">
           <CardContent className="p-8">
-            <h3 className="text-2xl font-semibold text-slate-900 text-center mb-8">How It Works</h3>
+            <h3 className="text-2xl font-semibold text-slate-900 text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              How It Works
+            </h3>
             <div className="grid md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">1</div>
-                <h4 className="font-semibold text-slate-900 mb-2">Upload Image</h4>
-                <p className="text-sm text-slate-600">Select and upload your image file in JPG, PNG, or JPEG format.</p>
+              <div className="text-center group animate-bounce-in">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">1</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Upload Image</h4>
+                <p className="text-sm text-slate-600">Select and upload your image file in JPG, PNG, JPEG, or WebP format.</p>
               </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">2</div>
-                <h4 className="font-semibold text-slate-900 mb-2">AI Analysis</h4>
-                <p className="text-sm text-slate-600">Our CNN model analyzes pixel patterns, edges, and textures for AI signatures.</p>
+              <div className="text-center group animate-bounce-in delay-200">
+                <div className="w-12 h-12 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">2</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">Multi-Algorithm Analysis</h4>
+                <p className="text-sm text-slate-600">6 advanced computer vision algorithms analyze texture patterns, compression signatures, and metadata.</p>
               </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">3</div>
-                <h4 className="font-semibold text-slate-900 mb-2">Get Results</h4>
-                <p className="text-sm text-slate-600">Receive classification results with confidence score and detailed analysis.</p>
+              <div className="text-center group animate-bounce-in delay-400">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">3</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-purple-600 transition-colors">Get Results</h4>
+                <p className="text-sm text-slate-600">Receive classification results with confidence score and detailed forensic indicators.</p>
               </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg">4</div>
-                <h4 className="font-semibold text-slate-900 mb-2">Download Report</h4>
-                <p className="text-sm text-slate-600">Optional detailed report with technical reasoning and feature analysis.</p>
+              <div className="text-center group animate-bounce-in delay-600">
+                <div className="w-12 h-12 bg-gradient-to-r from-pink-600 to-red-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-lg shadow-lg group-hover:scale-110 transition-transform duration-300">4</div>
+                <h4 className="font-semibold text-slate-900 mb-2 group-hover:text-pink-600 transition-colors">Download Report</h4>
+                <p className="text-sm text-slate-600">Optional detailed report with technical reasoning and computer vision analysis.</p>
               </div>
             </div>
           </CardContent>
