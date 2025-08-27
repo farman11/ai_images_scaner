@@ -23,7 +23,3 @@ services:
         value: 10000
       - key: PYTHONPATH
         value: /opt/render/project/src
-    disk:
-      name: ai-detector-disk
-      mountPath: /tmp
-      sizeGB: 1
